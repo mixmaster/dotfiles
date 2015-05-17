@@ -1,4 +1,83 @@
-syntax on
+" Donald Luo's .vimrc
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+" Plugins
+" =======
+
+set nocompatible                " be iMproved, required
+filetype off                    " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Themes
+Plugin 'altercation/vim-colors-solarized'
+
+" Syntax
+
+" Functions
+Plugin 'bling/vim-airline'
+
+" All of your plugins must be added before the following line
+call vundle#end()               " required
+filetype plugin indent on       " required
+
+" Appearance
+" ==========
+
+syntax enable
+set t_Co=256
+colorscheme solarized
+set background=dark
+set guifont=Source\ Code\ Pro\ For\ Powerline:h13
+set noshowmode                  " let airline handle the mode display
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep=' '
+let g:airline#extensions#tabline#left_alt_sep='|'
+
+" General config
+" ==============
+
+set encoding=utf-8
+set number
+set history=1000
+set laststatus=2
+set hidden
+set showcmd
+set cursorline
+set wildmenu
+set lazyredraw
+set showmatch
+
+" Searching
+" =========
+
+set incsearch
+set hlsearch
+nnoremap <leader><space> :nohlsearch<CR>    " Turn off search highlight
+
+" Indentation and Display
+" =======================
+
+set autoindent
+set smartindent
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
+set nowrap                      " Don't wrap lines
+
+" Folds
+" =====
+
+set foldmethod=indent
+
+" Plugin Options
+" ==============
