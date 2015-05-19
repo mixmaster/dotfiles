@@ -13,13 +13,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Themes
+" Look and Feel
 Plugin 'altercation/vim-colors-solarized'
-
-" Syntax
-
-" Functions
 Plugin 'bling/vim-airline'
+
+" Editing
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'marijnh/tern_for_vim'
 
 " All of your plugins must be added before the following line
 call vundle#end()               " required
