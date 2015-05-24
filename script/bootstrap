@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 #
 # bootstrap installs things.
 
@@ -137,8 +137,24 @@ install_dotfiles () {
   done
 }
 
+install_vundle () {
+  info "installing Vundle"
+  if ! [ -d ~/.vim/bundle/Vundle.vim ]
+  then
+    if git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim 2>&1
+    then
+      success "Vundle installed"
+    else
+      fail "error installing Vundle"
+    fi
+  else
+      success "skipped installing Vundle"
+  fi
+}
+
 setup_gitconfig
 install_dotfiles
+install_vundle
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
