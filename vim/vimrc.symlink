@@ -18,13 +18,30 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 
 " Editing
+Plugin 'kana/vim-textobj-entire'
+
+Plugin 'editorconfig/editorconfig-vim'
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp:/.*']
+
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
+
+if ! has('win32')
+  Plugin 'Valloric/YouCompleteMe'
+endif
+
 Plugin 'marijnh/tern_for_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+Plugin 'Lokaltog/vim-easymotion'
 
 " All of your plugins must be added before the following line
 call vundle#end()               " required
@@ -37,7 +54,15 @@ syntax enable
 set t_Co=256
 colorscheme solarized
 set background=dark
-set guifont=Source\ Code\ Pro\ For\ Powerline:h13
+if has('gui_running')
+  if has('win32')
+    set guifont=Inconsolata-g\ for\ Powerline:h11
+    set lines=40 columns=90
+  else
+    set guifont=Source\ Code\ Pro\ For\ Powerline:h13
+    set lines=45 columns=90
+  endif
+endif
 set noshowmode                  " let airline handle the mode display
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
@@ -71,9 +96,9 @@ nnoremap <leader><space> :nohlsearch<CR>    " Turn off search highlight
 set autoindent
 set smartindent
 set smarttab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set expandtab
 
 set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
@@ -82,7 +107,8 @@ set nowrap                      " Don't wrap lines
 " Folds
 " =====
 
-set foldmethod=indent
+set foldmethod=syntax
 
 " Plugin Options
 " ==============
+
