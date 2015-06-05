@@ -19,3 +19,7 @@ antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 #export ZSH_2000_DISABLE_RVM="true"
 #antigen-theme maverick2000/zsh2000 zsh2000
 antigen-apply
+
+export NVM_DIR="/home/dluo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
