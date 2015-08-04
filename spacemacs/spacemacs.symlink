@@ -154,6 +154,10 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+  ;; Frame size
+  (add-to-list 'default-frame-alist '(height . 50))
+  (add-to-list 'default-frame-alist '(width . 80))
+  ;; Load SLIME shipped with quicklisp
   (load (expand-file-name "~/.quicklisp/slime-helper.el"))
   (setq inferior-lisp-program "sbcl"))
 
