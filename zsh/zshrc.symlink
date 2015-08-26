@@ -14,6 +14,7 @@ antigen bundle history
 antigen bundle tmux
 antigen bundle vundle
 
+#antigen-theme robbyrussell
 antigen-theme agnoster
 #antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 #export ZSH_2000_DISABLE_RVM="true"
