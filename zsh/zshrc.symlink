@@ -16,8 +16,9 @@ antigen bundle vundle
 
 #antigen-theme robbyrussell
 #antigen-theme agnoster
-antigen theme bhilburn/powerlevel9k powerlevel9k
+#antigen theme bhilburn/powerlevel9k powerlevel9k
 #antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+antigen theme theunraveler
 #export ZSH_2000_DISABLE_RVM="true"
 #antigen-theme maverick2000/zsh2000 zsh2000
 antigen-apply
