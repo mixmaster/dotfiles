@@ -39,3 +39,8 @@
   "vim-mode": {}
   nuclide:
     remoteProjectsConfig: []
+  "haskell-ghc-mod":
+    ghcModPath: "/home/dluo/.cabal/bin/ghc-mod"
+    ghcModiPath: "/home/dluo/.cabal/bin/ghc-modi"
+  "ide-haskell":
+    stylishHaskellPath: "/home/dluo/.cabal/bin/stylish-haskell"
