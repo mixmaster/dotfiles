@@ -29,3 +29,7 @@ export NVM_DIR="/home/dluo/.nvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="$PATH:/usr/local/opt/llvm/bin"  # For LLVM installed by Homebrew
+
+# Anaconda
+export PATH="/home/dluo/Applications/anaconda2/bin:$PATH"
+
