@@ -15,8 +15,10 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugins
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/base16-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'kana/vim-textobj-user'
 Plugin 'kana/vim-textobj-entire'
@@ -41,8 +43,7 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 
-Plugin 'kien/ctrlp.vim'
-Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -60,11 +61,6 @@ else
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_prompt_mapping = { 'AcceptSelection("e")': ['<space>', '<CR>', '<2-LeftMouse>'] }
 endif
-if ! has('python')
-  echo 'In order to use pymatcher plugin, you need +python compiled vim'
-else
-  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-endif
 
 Plugin 'Lokaltog/vim-easymotion'
 
@@ -77,11 +73,12 @@ filetype plugin indent on       " required
 
 syntax enable
 set t_Co=256
-colorscheme solarized
+"colorscheme solarized
+colorscheme base16-default
 set background=dark
 if has('gui_running')
   if has('win32')
-    set guifont=Inconsolata-g\ for\ Powerline:h11
+    set guifont=Inconsolata-g\ for\ Powerline\ 11
     set lines=40 columns=90
   else
     set guifont=Source\ Code\ Pro\ For\ Powerline\ 11
@@ -112,7 +109,7 @@ set showmatch
 " ============
 
 let mapleader = "\<space>"
-inoremap jk <esc>
+inoremap fd <esc>
 inoremap <esc> <nop>
 nnoremap <leader>o :CtrlP<CR>
 nnoremap <leader>w :w<CR>
