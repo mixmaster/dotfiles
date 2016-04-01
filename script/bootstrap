@@ -141,7 +141,7 @@ install_vundle () {
   info "installing Vundle"
   if ! [ -d ~/.vim/bundle/Vundle.vim ]
   then
-    if git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim 2>&1
+    if git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim >/dev/null 2>&1
     then
       success "Vundle installed"
     else
