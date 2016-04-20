@@ -64,6 +64,9 @@ endif
 
 Plugin 'Lokaltog/vim-easymotion'
 
+Plugin 'kovisoft/slimv'
+let g:slimv_swank_cmd = '! mate-terminal -e sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp &'
+
 " All of your plugins must be added before the following line
 call vundle#end()               " required
 filetype plugin indent on       " required

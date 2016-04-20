@@ -19,10 +19,13 @@
      ;; ----------------------------------------------------------------
      ;; auto-completion
      ;; better-defaults
+     common-lisp
      emacs-lisp
      ;; git
      ;; markdown
      ;; org
+     ruby
+     ruby-on-rails
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -123,7 +126,7 @@ before layers configuration."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'.
@@ -152,11 +155,12 @@ before layers configuration."
    ;; specified with an installed package.
    ;; Not used for now.
    dotspacemacs-default-package-repository nil
-   )
-  ;; User initialization goes here
-  ;; Frame size
-  (add-to-list 'default-frame-alist '(height . 51))
-  (add-to-list 'default-frame-alist '(width . 101)))
+   ;; If t line numbers are toggled on in all prog-mode and text-mode buffers.
+   dotspacemacs-line-numbers t
+   ))
+
+(defun dotspacemacs/user-config ()
+  (setq powerline-default-separator 'arrow))
 
 (defun dotspacemacs/config ()
   "Configuration function.
