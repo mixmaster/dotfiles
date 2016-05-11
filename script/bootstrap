@@ -143,7 +143,7 @@ install_vundle () {
   then
     if git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim >/dev/null 2>&1
     then
-      success "Vundle installed"
+      success "installed Vundle"
     else
       fail "error installing Vundle"
     fi
@@ -152,9 +152,20 @@ install_vundle () {
   fi
 }
 
+install_powerline_fonts () {
+  info "installing powerline fonts"
+
+  cd "$DOTFILES_ROOT/vim/powerline-fonts"
+  ./install.sh >/dev/null 2>&1
+  cd "$DOTFILES_ROOT"
+
+  success "installed powerline fonts"
+}
+
 setup_gitconfig
 install_dotfiles
 install_vundle
+install_powerline_fonts
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
