@@ -2,3 +2,4 @@ git/gitconfig.symlink
 
 xmonad/xmonad.symlink/*
 !xmonad/xmonad.symlink/xmonad.hs
+!xmonad/xmonad.symlink/xbm_icons
