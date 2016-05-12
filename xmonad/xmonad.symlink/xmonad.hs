@@ -109,7 +109,7 @@ main = do
 --------------------------------------------------------------------------------------------
 
 -- Colors, fonts and paths
-dzenFont       = "-*-terminus-medium-r-normal-*-11-*-*-*-*-*-*-*"
+dzenFont       = "-*-montecarlo-medium-r-normal-*-11-*-*-*-*-*-*-*"
 colorBlack     = "#020202" --Background
 colorBlackAlt  = "#1c1c1c" --Black Xdefaults
 colorGray      = "#444444" --Gray
