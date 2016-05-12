@@ -4,7 +4,8 @@
 Xft.dpi:       96
 Xft.antialias: 1
 Xft.hinting:   1
-Xft.hintstyle: h:      rgb
+Xft.hintstyle: hintfull
+xft.rgba:      rgb
 !}}}
 
 !{{{ URXVT
@@ -41,8 +42,8 @@ urxvt*cursorColor: #DCDCCC
 urxvt*.colorUL:    #ffffff
 !
 ! Pseudo Transparency
-!urxvt*shading:    50
-!urxvt*transparent:true
+urxvt*shading:     50
+urxvt*transparent: true
 ! 
 ! Zenburn color-scheme
 urxvt*background:  #3f3f3f
