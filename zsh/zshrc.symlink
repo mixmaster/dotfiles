@@ -23,13 +23,17 @@ antigen theme theunraveler
 #antigen-theme maverick2000/zsh2000 zsh2000
 antigen-apply
 
-export NVM_DIR="/home/dluo/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+if [[ `uname` == 'Darwin' ]]; then
+  . "$(brew --prefix nvm)/nvm.sh"
+else
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
 
 export PATH="$PATH:/usr/local/opt/llvm/bin"  # For LLVM installed by Homebrew
 
 # Anaconda
-export PATH="/home/dluo/Applications/anaconda2/bin:$PATH"
+export PATH="$HOME/Applications/anaconda2/bin:$PATH"
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
