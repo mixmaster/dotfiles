@@ -18,8 +18,11 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/base16-vim'
 Plugin 'noahfrederick/vim-noctu'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+
+if has('gui_running')
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+endif
 
 Plugin 'kana/vim-textobj-user'
 Plugin 'kana/vim-textobj-entire'
@@ -92,19 +95,18 @@ if has('gui_running')
     set guifont=Terminess\ Powerline\ 12
     set lines=45 columns=90
   endif
+  set noshowmode                  " let airline handle the mode display
+  set guioptions-=m               " remove menu bar
+  set guioptions-=T               " remove toolbar
+  set guioptions-=r               " remove right-hand scroll bar
+  set guioptions-=L               " remoev left-hand scroll bar
+  let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
 else
   colorscheme noctu
 endif
-set noshowmode                  " let airline handle the mode display
-set guioptions-=m               " remove menu bar
-set guioptions-=T               " remove toolbar
-set guioptions-=r               " remove right-hand scroll bar
-set guioptions-=L               " remoev left-hand scroll bar
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
 " General config
 " ==============
 
