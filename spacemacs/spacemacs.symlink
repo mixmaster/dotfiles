@@ -187,7 +187,11 @@ before layers configuration."
 
 (defun dotspacemacs/user-config ()
   (setq powerline-default-separator 'arrow)
-  (spaceline-compile))
+  (spaceline-compile)
+
+  ;; Org settings
+  (setq org-directory "~/.org")
+  (setq org-log-done 'time))
 
 (defun dotspacemacs/config ()
   "Configuration function.
