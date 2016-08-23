@@ -22,7 +22,7 @@
                       auto-completion-enable-snippets-in-popup t)
      better-defaults
      (clojure :variables
-              clojure-enable-fancify-symbols t)
+              clojure-enable-fancify-symbols nil)
      c-c++
      common-lisp
      elixir
