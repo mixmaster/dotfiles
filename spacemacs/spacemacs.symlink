@@ -66,6 +66,7 @@
    dotspacemacs-additional-packages
    '(
      editorconfig
+     vue-mode
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -194,7 +195,9 @@ before layers configuration."
   (setq powerline-default-separator 'arrow)
   (spaceline-compile)
 
+  ;; Configs to some modes
   (editorconfig-mode 1)
+  (add-to-list 'auto-mode-alist '("\\.vue$" . vue-mode))
 
   ;; Org settings
   (with-eval-after-load 'org
