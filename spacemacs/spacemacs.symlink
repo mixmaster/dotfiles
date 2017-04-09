@@ -194,6 +194,7 @@ before layers configuration."
    ))
 
 (defun dotspacemacs/user-config ()
+  (setq ns-use-srgb-colorspace nil)
   (setq powerline-default-separator 'arrow)
   (spaceline-compile)
 
