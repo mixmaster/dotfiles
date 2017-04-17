@@ -66,7 +66,8 @@ values."
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom
-             shell-default-term-shell "/bin/bash")
+             shell-default-shell 'multi-term
+             shell-default-term-shell "/bin/zsh")
      sml
      sql
      syntax-checking
