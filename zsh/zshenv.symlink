@@ -1,0 +1,29 @@
+# nvm
+export NVM_DIR="$HOME/.nvm"
+if [[ `uname` == 'Darwin' ]]; then
+  . "$(brew --prefix nvm)/nvm.sh"
+else
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
+
+# LLVM
+if [[ `uname` == 'Darwin' ]]; then
+  export PATH="$PATH:/usr/local/opt/llvm/bin"  # For LLVM installed by Homebrew
+fi
+
+# Anaconda
+if [[ `uname` == 'Darwin' ]]; then
+  export PATH="$HOME/anaconda2/bin:$PATH"
+else
+  export PATH="$HOME/Applications/anaconda2/bin:$PATH"
+fi
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# OPAM configuration
+. ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Stack (Haskell)
+export PATH="$HOME/.local/bin:$PATH"
