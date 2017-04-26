@@ -49,7 +49,9 @@ values."
      ess
      git
      go
-     (haskell :variables haskell-enable-hindent-style "johan-tibell")
+     (haskell :variables
+              haskell-enable-hindent-style "johan-tibell"
+              haskell-process-type 'stack-ghci)
      helm
      html
      javascript
