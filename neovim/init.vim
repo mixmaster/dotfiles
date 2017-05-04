@@ -1,87 +1,79 @@
-" Donald Luo's .vimrc
+" Donald Luo's neovim configuration
 
 set nocompatible                " be iMproved, required
 syntax on
 set nowrap
 set encoding=utf8
 
-" Vundle Plugins
+" Plugins
 " ==============
 
-" Disable file type for Vundle
-filetype off                    " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Utility
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'ervandew/supertab'
-Plugin 'BufOnly.vim'
-Plugin 'wesQ3/vim-windowswap'
-Plugin 'SirVer/ultisnips'
-Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/fzf'
-Plugin 'godlygeek/tabular'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'benmills/vimux'
-Plugin 'jeetsukumaran/vim-buffergator'
-Plugin 'gilsondev/searchtasks.vim'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'tpope/vim-dispatch'
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-entire'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'wesQ3/vim-windowswap'
+Plug 'SirVer/ultisnips'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'godlygeek/tabular'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'benmills/vimux'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'gilsondev/searchtasks.vim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'tpope/vim-dispatch'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'Lokaltog/vim-easymotion'
 
 " Generic Programming Support
-Plugin 'honza/vim-snippets'
-Plugin 'Townk/vim-autoclose'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'vim-syntastic/syntastic'
+Plug 'honza/vim-snippets'
+Plug 'Townk/vim-autoclose'
+Plug 'tomtom/tcomment_vim'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'vim-syntastic/syntastic'
 
 " Markdown
-Plugin 'reedes/vim-pencil'
-Plugin 'tpope/vim-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
+Plug 'reedes/vim-pencil'
+Plug 'tpope/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
 
 " Git Support
-Plugin 'kablamo/vim-git-log'
-Plugin 'gregsexton/gitv'
-Plugin 'tpope/vim-fugitive'
+Plug 'kablamo/vim-git-log'
+Plug 'gregsexton/gitv'
+Plug 'tpope/vim-fugitive'
 
 " JavaScript
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'marijnh/tern_for_vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'leafgarland/typescript-vim'
+Plug 'marijnh/tern_for_vim'
 
 " Lisp / Clojure
-Plugin 'Raimondi/delimitMate'
-Plugin 'kovisoft/slimv'
+Plug 'Raimondi/delimitMate'
+Plug 'kovisoft/slimv'
 
 " User Interface
-Plugin 'AnsiEsc.vim'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'chriskempson/base16-vim'
-Plugin 'noahfrederick/vim-noctu'
-Plugin 'colepeters/spacemacs-theme.vim'
-Plugin 'ajh17/Spacegray.vim'
+Plug 'vim-scripts/Improved-AnsiEsc'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chriskempson/base16-vim'
+Plug 'noahfrederick/vim-noctu'
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'ajh17/Spacegray.vim'
 
 " OSX Fix
 set backspace=indent,eol,start
 
 " All of your plugins must be added before the following line
-call vundle#end()               " required
+call plug#end()                 " required
 filetype plugin indent on       " required
 
 " Configurations

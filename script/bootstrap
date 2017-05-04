@@ -137,25 +137,29 @@ install_dotfiles () {
   done
 }
 
-install_vundle () {
-  info "installing Vundle"
-  if ! [ -d ~/.vim/bundle/Vundle.vim ]
+install_and_configure_neovim () {
+  info "installing vim-plug"
+  if ! [ -f ~/.local/share/nvim/site/autoload/plug.vim ]
   then
-    if git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim >/dev/null 2>&1
+    if curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >/dev/null 2>&1
     then
-      success "installed Vundle"
+      success "installed vim-plug"
     else
-      fail "error installing Vundle"
+      fail "error installing vim-plug"
     fi
   else
-      success "skipped installing Vundle"
+      success "skipped installing vim-plug"
   fi
+
+  info "linking neovim configuration file"
+  mkdir -p "$HOME/.config/nvim"
+  link_file "$DOTFILES_ROOT/neovim/init.vim" "$HOME/.config/nvim/init.vim"
 }
 
 install_powerline_fonts () {
   info "installing powerline fonts"
 
-  cd "$DOTFILES_ROOT/vim/powerline-fonts"
+  cd "$DOTFILES_ROOT/neovim/powerline-fonts"
   ./install.sh >/dev/null 2>&1
   cd "$DOTFILES_ROOT"
 
@@ -164,7 +168,7 @@ install_powerline_fonts () {
 
 setup_gitconfig
 install_dotfiles
-install_vundle
+install_and_configure_neovim
 install_powerline_fonts
 
 # If we're on a Mac, let's install and setup homebrew.
