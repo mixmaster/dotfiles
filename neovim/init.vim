@@ -1,6 +1,6 @@
 " Donald Luo's neovim configuration
 
-set nocompatible                " be iMproved, required
+set nocompatible
 syntax on
 set nowrap
 set encoding=utf8
@@ -17,14 +17,12 @@ Plug 'ervandew/supertab'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'wesQ3/vim-windowswap'
 Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf'
 Plug 'godlygeek/tabular'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'benmills/vimux'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'gilsondev/searchtasks.vim'
-Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-dispatch'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
@@ -37,6 +35,7 @@ Plug 'Townk/vim-autoclose'
 Plug 'tomtom/tcomment_vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'vim-syntastic/syntastic'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Markdown
 Plug 'reedes/vim-pencil'
@@ -48,6 +47,9 @@ Plug 'kablamo/vim-git-log'
 Plug 'gregsexton/gitv'
 Plug 'tpope/vim-fugitive'
 
+" Python
+Plug 'zchee/deoplete-jedi'
+
 " JavaScript
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
@@ -58,6 +60,13 @@ Plug 'marijnh/tern_for_vim'
 " Lisp / Clojure
 Plug 'Raimondi/delimitMate'
 Plug 'kovisoft/slimv'
+
+" Haskell
+Plug 'eagletmt/neco-ghc'
+Plug 'eagletmt/ghcmod-vim'
+
+" Vimscript
+Plug 'Shougo/neco-vim'
 
 " User Interface
 Plug 'vim-scripts/Improved-AnsiEsc'
@@ -73,17 +82,12 @@ Plug 'ajh17/Spacegray.vim'
 set backspace=indent,eol,start
 
 " All of your plugins must be added before the following line
-call plug#end()                 " required
-filetype plugin indent on       " required
+call plug#end()
+filetype plugin indent on
 
 " Configurations
 " ==============
 
-" Searching
-set incsearch
-set hlsearch
-
-" Indentation and Display
 set number
 set ruler
 set autoindent
@@ -97,6 +101,12 @@ set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visual
 set laststatus=2
 set cursorline
 set showmatch
+set incsearch
+set hlsearch
+set mouse=a
+set completeopt=menuone,menu,longest
+set wildmode=longest,list,full
+set wildmenu
 
 " Appearance
 set t_Co=256
@@ -157,24 +167,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
-" Neocomplete
-let g:acp_enableAtStartup = 0
-let g:newcomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-  \ 'default' : '',
-  \ 'vimshell' : $HOME.'/.vimshell_hist',
-  \ 'scheme' : $HOME.'/.gosh_completions'
-  \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
 function! s:my_cr_function()
   return (pumvisible() ? "\<C-y>" : "") . "\<CR>"
@@ -184,61 +178,6 @@ endfunction
 
 " Close popup by <Space>.
 " inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-" let g:neocomplete#enable_auto_select = 1
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-" Fzf Configuration
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
-
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-  \ { 'fg':      ['fg', 'Normal'],
-  \   'bg':      ['bg', 'Normal'],
-  \   'hl':      ['fg', 'Comment'],
-  \   'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \   'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \   'hl+':     ['fg', 'Statement'],
-  \   'info':    ['fg', 'PreProc'],
-  \   'prompt':  ['fg', 'Conditional'],
-  \   'pointer': ['fg', 'Exception'],
-  \   'marker':  ['fg', 'Keyword'],
-  \   'spinner': ['fg', 'Label'],
-  \   'header':  ['fg', 'Comment'] }
-
-" Enable per-command history.
-" CTRL-N and CTRL-P will be automatically bound to next-history and
-" previous-history instead of down and up. If you don't like the change,
-" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Mapping Keys
 
@@ -255,16 +194,8 @@ vmap <leader>p "+p
 vmap <leader>P "+P
 nmap <leader><leader> V
 
-map <C-n> :NERDTreeToggle<CR>
-map <C-m> :TagbarToggle<CR>
-
-" Ommicomplete
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
-
-" Neocomplete mappings
-inoremap <expr><C-g>    neocomplete#undo_completion()
-inoremap <expr><C-l>    neocomplete#complete_common_string()
+map <leader>n :NERDTreeToggle<CR>
+map <leader>m :TagbarToggle<CR>
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent
@@ -272,31 +203,6 @@ inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 " <TAB>: completion.
 inoremap <expr><TAB>    pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Mapping selecting Mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Shortcuts
-nnoremap <Leader>o :Files<CR>
-nnoremap <Leader>O :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
-
-" Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " Editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp:/.*']
@@ -328,3 +234,18 @@ endif
 
 " Slimv
 let g:slimv_swank_cmd = '! mate-terminal -e sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp &'
+
+" Haskell
+let g:haskell_tabular = 1
+
+vmap a= :Tabularize /=<CR>
+vmap a; :Tabularize /::<CR>
+vmap a- :Tabularize /-><CR>
+
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
+
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
