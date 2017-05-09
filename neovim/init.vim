@@ -34,7 +34,7 @@ Plug 'honza/vim-snippets'
 Plug 'Townk/vim-autoclose'
 Plug 'tomtom/tcomment_vim'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'vim-syntastic/syntastic'
+Plug 'neomake/neomake'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Markdown
@@ -63,7 +63,8 @@ Plug 'kovisoft/slimv'
 
 " Haskell
 Plug 'eagletmt/neco-ghc'
-Plug 'eagletmt/ghcmod-vim'
+Plug 'parsonsmatt/intero-neovim'
+Plug 'alx741/vim-hindent'
 
 " Vimscript
 Plug 'Shougo/neco-vim'
@@ -134,15 +135,8 @@ let g:airline_theme = 'hybrid'
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticsStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" neomake
+autocmd! BufWritePost * Neomake
 
 " Markdown
 augroup markdown
@@ -242,10 +236,17 @@ vmap a= :Tabularize /=<CR>
 vmap a; :Tabularize /::<CR>
 vmap a- :Tabularize /-><CR>
 
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
-
+nnoremap <Leader>hio :InteroOpen<CR>
+nnoremap <Leader>hik :InteroKill<CR>
+nnoremap <Leader>hic :InteroHide<CR>
+nnoremap <Leader>hil :InteroLoadCurrentModule<CR>
+nnoremap <Leader>hie :InteroEval<CR>
+nnoremap <Leader>hit :InteroGenericType<CR>
+nnoremap <Leader>hiT :InteroType<CR>
+nnoremap <Leader>hii :InteroInfo<CR>
+nnoremap <Leader>hiI :InteroTypeInsert<CR>
+nnoremap <Leader>hid :InteroGoToDef<CR>
+nnoremap <Leader>hiu :InteroUses<CR>
 let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+autocmd! BufWritePost *.hs InteroReload
