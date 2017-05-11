@@ -30,6 +30,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Lokaltog/vim-easymotion'
 
 " Generic Programming Support
+Plug 'sheerun/vim-polyglot'
 Plug 'honza/vim-snippets'
 Plug 'Townk/vim-autoclose'
 Plug 'tomtom/tcomment_vim'
@@ -71,16 +72,10 @@ Plug 'Shougo/neco-vim'
 
 " User Interface
 Plug 'vim-scripts/Improved-AnsiEsc'
-Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
-Plug 'noahfrederick/vim-noctu'
-Plug 'colepeters/spacemacs-theme.vim'
-Plug 'ajh17/Spacegray.vim'
-
-" OSX Fix
-set backspace=indent,eol,start
+Plug 'mhartington/oceanic-next'
+Plug 'ryanoasis/vim-devicons'
 
 " All of your plugins must be added before the following line
 call plug#end()
@@ -117,16 +112,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let base16colorspace=256          " access colors preset in 256 colorspace
-colorscheme spacegray
-let g:spacegrey_underline_search = 1
-let g:spacegrey_italicize_comments = 1
-
-" Fonts
-if has('gui_running')
-  set guifont=Source\ Code\ Pro\ for\ Powerline\ 10
-  set lines=55 columns=100
-endif
+colorscheme OceanicNext
 
 " Vim-Airline
 let g:airline#extension#tabline#enabled = 1
@@ -134,6 +120,7 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'hybrid'
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
+let g:airline_theme = 'oceanicnext'
 
 " neomake
 autocmd! BufWritePost * Neomake
