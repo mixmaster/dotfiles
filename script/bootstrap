@@ -156,20 +156,9 @@ install_and_configure_neovim () {
   link_file "$DOTFILES_ROOT/neovim/init.vim" "$HOME/.config/nvim/init.vim"
 }
 
-install_powerline_fonts () {
-  info "installing powerline fonts"
-
-  cd "$DOTFILES_ROOT/neovim/powerline-fonts"
-  ./install.sh >/dev/null 2>&1
-  cd "$DOTFILES_ROOT"
-
-  success "installed powerline fonts"
-}
-
 setup_gitconfig
 install_dotfiles
 install_and_configure_neovim
-install_powerline_fonts
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
