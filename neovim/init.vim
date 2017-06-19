@@ -71,6 +71,9 @@ Plug 'alx741/vim-hindent'
 " Vimscript
 Plug 'Shougo/neco-vim'
 
+" Kotlin
+Plug 'udalov/kotlin-vim'
+
 " User Interface
 Plug 'vim-scripts/Improved-AnsiEsc'
 Plug 'vim-airline/vim-airline'
