@@ -64,8 +64,8 @@ Plug 'kovisoft/slimv'
 
 " Haskell
 Plug 'eagletmt/neco-ghc'
-" Plug 'mixmaster/intero-neovim'
-Plug 'eagletmt/ghcmod-vim'
+Plug 'mixmaster/intero-neovim'
+" Plug 'eagletmt/ghcmod-vim'
 Plug 'alx741/vim-hindent'
 
 " Vimscript
@@ -230,22 +230,17 @@ vmap a- :Tabularize /-><CR>
 let g:haskellmode_completion_ghc = 0
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-" nnoremap <leader>hio :InteroOpen<CR>
-" nnoremap <leader>hik :InteroKill<CR>
-" nnoremap <leader>hic :InteroHide<CR>
-" nnoremap <leader>hil :InteroLoadCurrentModule<CR>
-" nnoremap <leader>hie :InteroEval<CR>
-" nnoremap <leader>hit :InteroGenericType<CR>
-" nnoremap <leader>hiT :InteroType<CR>
-" nnoremap <leader>hii :InteroInfo<CR>
-" nnoremap <leader>hiI :InteroTypeInsert<CR>
-" nnoremap <leader>hid :InteroGoToDef<CR>
-" nnoremap <leader>hiu :InteroUses<CR>
-" autocmd! BufWritePost *.hs InteroReload
+nnoremap <leader>hio :InteroOpen<CR>
+nnoremap <leader>hik :InteroKill<CR>
+nnoremap <leader>hic :InteroHide<CR>
+nnoremap <leader>hil :InteroLoadCurrentModule<CR>
+nnoremap <leader>hif :InteroLoadCurrentFile<CR>
+nnoremap <leader>hie :InteroEval<CR>
+nnoremap <leader>hit :InteroGenericType<CR>
+nnoremap <leader>hiT :InteroType<CR>
+nnoremap <leader>hii :InteroInfo<CR>
+nnoremap <leader>hiI :InteroTypeInsert<CR>
+nnoremap <leader>hid :InteroGoToDef<CR>
+nnoremap <leader>hiu :InteroUses<CR>
 
-autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-nnoremap <leader>ht :GhcModType<CR>
-nnoremap <leader>hsc :GhcModSigCodegen<CR>
-nnoremap <leader>hti :GhcModTypeInsert<CR>
-nnoremap <leader>htc :GhcModTypeClear<CR>
-nnoremap <leader>hsf :GhcModSplitFunCases<CR>
+autocmd! BufWritePost *.hs InteroReload
