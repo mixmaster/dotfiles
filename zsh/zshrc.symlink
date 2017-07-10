@@ -23,13 +23,6 @@ antigen theme theunraveler
 #antigen-theme maverick2000/zsh2000 zsh2000
 antigen-apply
 
-# Linuxbrew
-if [[ `uname` == 'Linux' ]]; then
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-fi
-
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -54,3 +47,4 @@ export PATH="$HOME/.local/bin:$PATH"
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
