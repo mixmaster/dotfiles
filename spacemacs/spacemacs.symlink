@@ -50,7 +50,7 @@ values."
      erlang
      ess
      git
-     go
+     (go :variables go-use-gometalinter t)
      (haskell :variables
               haskell-enable-hindent-style "johan-tibell"
               haskell-process-type 'stack-ghci)
@@ -64,6 +64,7 @@ values."
      (ranger :variables
              ranger-show-preview t
              ranger-cleanup-on-disable t)
+     react
      ruby
      ruby-on-rails
      scala
