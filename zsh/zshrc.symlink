@@ -47,7 +47,11 @@ antigen bundle lein
 antigen bundle cabal
 antigen bundle stack
 
-antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+# Pure theme
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
+
+#antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
 
 antigen apply
 
