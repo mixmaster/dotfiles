@@ -27,8 +27,8 @@ else
   export PATH="$GOENV_ROOT/bin:$PATH"
 fi
 eval "$(goenv init -)"
-export GOPATH="$HOME/.go"
-export PATH="$GOPATH/bin:$PATH"
+export GOPATH="$HOME/.go:$HOME/Playground/goweb"
+export PATH="$HOME/.go/bin:$PATH"
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
