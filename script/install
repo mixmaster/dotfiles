@@ -1,10 +1,45 @@
 #!/usr/bin/env bash
-#
-# Run all dotfiles installers.
 
 set -e
 
-cd "$(dirname $0)"/..
+# pyenv
+if ! [ -d ~/.pyenv ]
+then
+  git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+fi
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+# rbenv and ruby-build
+if ! [ -d ~/.rbenv ]
+then
+  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+fi
+
+# goenv
+if ! [ -d ~/.goenv ]
+then
+  git clone https://github.com/syndbg/goenv.git ~/.goenv
+fi
+
+# nvm
+if ! [ -d ~/.nvm ]
+then
+  git clone https://github.com/creationix/nvm.git ~/.nvm
+fi
+
+# nerdfonts
+if ! [ -d ~/.nerd-fonts ]
+then
+  git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/.nerd-fonts
+  cd ~/.nerd-fonts
+  ./install.sh
+fi
+
+# spacemacs
+if ! [ -d ~/.emacs.d ]
+then
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+fi
+
+echo ''
+echo 'All installed!'
