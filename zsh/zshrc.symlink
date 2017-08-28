@@ -48,10 +48,11 @@ antigen bundle cabal
 antigen bundle stack
 
 # Pure theme
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
+#antigen bundle mafredri/zsh-async
+#antigen bundle sindresorhus/pure
 
 #antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+antigen theme denysdovhan/spaceship-zsh-theme spaceship
 
 antigen apply
 
