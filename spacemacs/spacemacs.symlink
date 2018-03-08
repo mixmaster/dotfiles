@@ -61,7 +61,7 @@ values."
              ranger-cleanup-on-disable t)
      ruby
      (shell :variables
-            shell-default-shell 'multi-shell
+            shell-default-shell 'multi-term
             shell-default-height 30
             shell-default-position 'bottom)
      syntax-checking
