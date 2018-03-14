@@ -376,6 +376,11 @@ you should place your code here."
   (setq powerline-default-separator 'utf-8)
   (spaceline-compile)
 
+  ;; turn off error highlighting in js2-mode
+  (setq-default
+    js2-mode-show-parse-errors nil
+    js2-mode-show-strict-warnings nil)
+
   ;; editorconfig-mode
   (editorconfig-mode 1)
 
@@ -387,4 +392,5 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
   (add-to-list 'auto-mode-alist '("\\.react.js\\'" . rjsx-mode))
   (add-to-list 'magic-mode-alist '("/\\*\\* @jsx React\\.DOM \\*/" . rjsx-mode))
-  (add-to-list 'magic-mode-alist '("^import React" . rjsx-mode)))
+  (add-to-list 'magic-mode-alist '("^import React" . rjsx-mode))
+  (spacemacs/add-flycheck-hook 'rjsx-mode))
