@@ -400,18 +400,10 @@ you should place your code here."
   (add-to-list 'auto-mode-alist '("\\.react.js\\'" . rjsx-mode))
   (add-to-list 'magic-mode-alist '("/\\*\\* @jsx React\\.DOM \\*/" . rjsx-mode))
   (add-to-list 'magic-mode-alist '("^import React" . rjsx-mode))
-  (spacemacs/add-flycheck-hook 'rjsx-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (idris-mode prop-menu anaconda-mode eval-sexp-fu smartparens highlight skewer-mode simple-httpd markdown-mode hydra pythonic inf-ruby projectile-rails orgit link-hint js2-refactor helm-projectile helm-make evil-matchit evil-magit company-web clojure-snippets clj-refactor multiple-cursors cider helm helm-core magit magit-popup git-commit ghub with-editor dash peg epl yaml-mode which-key web-mode vue-mode use-package spaceline powerline pyvenv projectile org-plus-contrib live-py-mode hy-mode hl-todo gitconfig-mode gitattributes-mode feature-mode exec-path-from-shell evil-nerd-commenter editorconfig dumb-jump define-word clojure-mode auto-compile packed avy evil flycheck go-mode yasnippet gitignore-mode async js2-mode company slime s yapfify xterm-color ws-butler winum web-completion-data web-beautify vue-html-mode volatile-highlights vi-tilde-fringe uuidgen unfill undo-tree toc-org tagedit ssass-mode smeargle slime-company slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rjsx-mode restart-emacs rbenv ranger rake rainbow-delimiters queue pytest pyenv-mode py-isort pug-mode popwin pkg-info pip-requirements persp-mode paredit paradox org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode minitest markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative less-css-mode json-mode js-doc inflections indent-guide hungry-delete highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag graphql-mode goto-chg google-translate golden-ratio go-guru go-eldoc git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flycheck-pos-tip flycheck-gometalinter flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edn edit-indirect diminish diff-hl cython-mode company-tern company-statistics company-go company-anaconda common-lisp-snippets column-enforce-mode coffee-mode clean-aindent-mode cider-eval-sexp-fu chruby bundler bind-key auto-yasnippet auto-highlight-symbol aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  (spacemacs/add-flycheck-hook 'rjsx-mode)
+
+  ;; prolog (not prolog-mode)
+  (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+  (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+  (setq prolog-system 'swi)
+  (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode)))
