@@ -27,14 +27,6 @@ then
   git clone https://github.com/creationix/nvm.git ~/.nvm
 fi
 
-# nerdfonts
-if ! [ -d ~/.nerd-fonts ]
-then
-  git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git ~/.nerd-fonts
-  cd ~/.nerd-fonts
-  ./install.sh
-fi
-
 # spacemacs
 if ! [ -d ~/.emacs.d ]
 then
@@ -42,4 +34,4 @@ then
 fi
 
 echo ''
-echo 'All installed!'
+echo 'All installed.'

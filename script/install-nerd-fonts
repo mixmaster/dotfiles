@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+fonts_ver="v2.0.0"
+base_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${fonts_ver}"
+font_dir="${HOME}/.local/share/fonts"
+sel_fonts="DejaVuSansMono Hack InconsolataGo LiberationMono Meslo SourceCodePro UbuntuMono"
+
+mkdir -p "${font_dir}"
+
+IFS=' ' read -a font_arr <<< "${sel_fonts}"
+for font in "${font_arr[@]}"
+do
+  echo "Downloading ${font} fonts..."
+  curl -sLo "/tmp/${font}.zip" "${base_url}/${font}.zip"
+  echo "Extracting ${font} fonts..."
+  unzip -qo "/tmp/${font}.zip" -d "${font_dir}"
+  rm "/tmp/${font}.zip"
+done
+
+echo "Updating font cache..."
+fc-cache -f "$font_dir"
+
+echo "Nerd fonts installed."
