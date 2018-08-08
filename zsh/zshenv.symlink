@@ -3,39 +3,47 @@ if [[ `uname` == 'Darwin' ]]; then
 fi
 
 # rbenv
-if [[ `uname` == 'Darwin' ]]; then
-  export PATH="$(brew --prefix rbenv)/bin:$PATH"
-else
-  export PATH="$HOME/.rbenv/bin:$PATH"
+if [[ -d "$HOME/.rbenv" ]]; then
+  if [[ `uname` == 'Darwin' ]]; then
+    export PATH="$(brew --prefix rbenv)/bin:$PATH"
+  else
+    export PATH="$HOME/.rbenv/bin:$PATH"
+  fi
+  eval "$(rbenv init -)"
 fi
-eval "$(rbenv init -)"
 
 # pyenv
-if [[ `uname` == 'Darwin' ]]; then
-  export PATH="$(brew --prefix pyenv)/bin:$PATH"
-else
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
+if [[ -d "$HOME/.pyenv" ]]; then
+  if [[ `uname` == 'Darwin' ]]; then
+    export PATH="$(brew --prefix pyenv)/bin:$PATH"
+  else
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+  fi
+  eval "$(pyenv init -)"
 fi
-eval "$(pyenv init -)"
 
 # goenv
-if [[ `uname` == 'Darwin' ]]; then
-  export PATH="$(brew --prefix goenv)/bin:$PATH"
-else
-  export GOENV_ROOT="$HOME/.goenv"
-  export PATH="$GOENV_ROOT/bin:$PATH"
+if [[ -d "$HOME/.goenv" ]]; then
+  if [[ `uname` == 'Darwin' ]]; then
+    export PATH="$(brew --prefix goenv)/bin:$PATH"
+  else
+    export GOENV_ROOT="$HOME/.goenv"
+    export PATH="$GOENV_ROOT/bin:$PATH"
+  fi
+  eval "$(goenv init -)"
+  export GOPATH="$HOME/.go:$HOME/Playground/goweb"
+  export PATH="$HOME/.go/bin:$PATH"
 fi
-eval "$(goenv init -)"
-export GOPATH="$HOME/.go:$HOME/Playground/goweb"
-export PATH="$HOME/.go/bin:$PATH"
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-if [[ `uname` == 'Darwin' ]]; then
-  . "$(brew --prefix nvm)/nvm.sh"
-else
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+if [[ -d "$HOME/.nvm" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  if [[ `uname` == 'Darwin' ]]; then
+    . "$(brew --prefix nvm)/nvm.sh"
+  else
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  fi
 fi
 
 # Stack (Haskell)

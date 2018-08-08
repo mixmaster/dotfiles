@@ -5,10 +5,6 @@ antigen use oh-my-zsh
 if [[ `uname` == 'Darwin' ]]; then
   antigen bundle osx
   antigen bundle brew
-else
-  if [[ `lsb_release -i` =~ 'Fedora' ]]; then
-    antigen bundle fedora
-  fi
 fi
 
 # General
