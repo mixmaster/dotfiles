@@ -36,7 +36,8 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (auto-completion :variables
+     (auto-completion (haskell :variables haskell-completion-backend 'intero)
+                      :variables
                       auto-completion-return-key-behavior nil
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-complete-with-key-sequence "jk")
@@ -51,6 +52,8 @@ values."
          flycheck-gometalinter-vendor t
          flycheck-gometalinter-fast t
          gofmt-command "goimports")
+     (haskell :variables
+              haskell-enable-hindent-style "johan-tibell")
      helm
      html
      idris
