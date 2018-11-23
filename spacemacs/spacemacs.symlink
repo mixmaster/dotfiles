@@ -44,9 +44,9 @@ values."
      better-defaults
      (clojure :variables
               clojure-enable-fancify-symbols nil)
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode
-            c-c++-enable-clang-support t)
+     ;(c-c++ :variables
+     ;       c-c++-default-mode-for-headers 'c++-mode
+     ;       c-c++-enable-clang-support t)
      common-lisp
      emacs-lisp
      git
@@ -55,19 +55,19 @@ values."
          flycheck-gometalinter-vendor t
          flycheck-gometalinter-fast t
          gofmt-command "goimports")
-     (haskell :variables
-              haskell-enable-hindent-style "johan-tibell")
+     ;(haskell :variables
+     ;         haskell-enable-hindent-style "johan-tibell")
      helm
      html
-     idris
+     ;idris
      javascript
      markdown
      python
-     ruby-on-rails
+     ;ruby-on-rails
      (ranger :variables
              ranger-show-preview t
              ranger-cleanup-on-disable t)
-     ruby
+     ;ruby
      (shell :variables
             shell-default-shell 'multi-term
             shell-default-height 30
@@ -164,16 +164,11 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font (if (string-equal system-type "darwin")
-                               '("Knack Nerd Font"
-                                  :size 12
-                                  :weight normal
-                                  :width normal
-                                  :powerline-scale 1.1)
-                               '("Hack Nerd Font"
-                                  :size 14
-                                  :weight normal
-                                  :powerline-scale 1.1))
+   dotspacemacs-default-font '("SauceCodePro Nerd Font"
+                               :size 13
+                               :weight normal
+                               :width normal
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -413,3 +408,15 @@ you should place your code here."
   (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
   (setq prolog-system 'swi)
   (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
