@@ -9,7 +9,7 @@ This function should only modify configuration layer settings."
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
    ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs-base
+   dotspacemacs-distribution 'spacemacs
 
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
@@ -64,12 +64,11 @@ This function should only modify configuration layer settings."
      html
      ;idris
      javascript
-     lsp
      markdown
      multiple-cursors
      neotree
      python
-     react
+     ;react
      ;ruby-on-rails
      (ranger :variables
              ranger-show-preview t
@@ -92,13 +91,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages
-   '(
-     editorconfig
-     graphql-mode
-     vue-mode
-     prolog-mode
-     )
+   dotspacemacs-additional-packages '(editorconfig)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -530,22 +523,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; turn off error highlighting in js2-mode
-  (setq-default
-    js2-mode-show-parse-errors nil
-    js2-mode-show-strict-warnings nil)
-
   ;; editorconfig-mode
   (editorconfig-mode 1)
-
-  ;; vue-mode
-  (add-to-list 'auto-mode-alist '("\\.vue$" . vue-mode))
-
-  ;; prolog (not prolog-mode)
-  (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
-  (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
-  (setq prolog-system 'swi)
-  (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -562,7 +541,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet-snippets yapfify yaml-mode xterm-color web-mode web-beautify vue-mode edit-indirect ssass-mode vue-html-mode unfill tagedit smeargle slime-company slime slim-mode shell-pop scss-mode sass-mode rjsx-mode ranger pyvenv pytest pyenv-mode py-isort pug-mode prettier-js pippel pipenv pip-requirements mwim multi-term mmm-mode markdown-toc magit-svn magit-gitflow lsp-ui markdown-mode lsp-python lsp-javascript-typescript typescript-mode lsp-go livid-mode skewer-mode live-py-mode json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc importmagic epc ctable concurrent deferred impatient-mode htmlize simple-httpd helm-pydoc helm-gitignore request helm-git-grep helm-css-scss helm-company helm-c-yasnippet haml-mode graphql-mode godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-pos-tip pos-tip flycheck-gometalinter flycheck evil-magit magit magit-popup git-commit ghub treepy graphql with-editor eshell-z eshell-prompt-extras esh-help emmet-mode editorconfig diff-hl cython-mode company-web web-completion-data company-tern tern company-statistics company-lsp lsp-mode ht dash-functional company-go go-mode company-anaconda company common-lisp-snippets clojure-snippets clojure-cheatsheet cider-eval-sexp-fu eval-sexp-fu highlight cider sesman spinner queue clojure-mode browse-at-remote auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete which-key use-package pcre2el overseer neotree nameless macrostep hydra helm-xref helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag evil-mc elisp-slime-nav dotenv-mode diminish bind-map auto-compile ace-jump-helm-line))))
+    (ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen toc-org symon string-inflection spaceline-all-the-icons spaceline powerline restart-emacs rainbow-delimiters popwin persp-mode password-generator paradox org-bullets open-junk-file move-text lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-purpose window-purpose imenu-list google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu dumb-jump doom-modeline eldoc-eval shrink-path all-the-icons memoize define-word counsel-projectile counsel swiper ivy column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol aggressive-indent ace-window ace-link org-plus-contrib font-lock+ yasnippet-snippets yapfify yaml-mode xterm-color which-key web-mode web-beautify vue-mode use-package unfill tagedit smeargle slime-company slim-mode shell-pop scss-mode sass-mode rjsx-mode ranger pyvenv pytest pyenv-mode py-isort pug-mode prettier-js pippel pipenv pip-requirements pcre2el overseer neotree nameless mwim multi-term markdown-toc magit-svn magit-gitflow lsp-ui lsp-python lsp-javascript-typescript lsp-go livid-mode live-py-mode json-navigator json-mode js2-refactor js-doc importmagic impatient-mode hydra helm-xref helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag graphql-mode godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flycheck-pos-tip flycheck-gometalinter evil-mc evil-magit eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dotenv-mode diminish diff-hl cython-mode company-web company-tern company-statistics company-lsp company-go company-anaconda common-lisp-snippets clojure-snippets clojure-cheatsheet cider-eval-sexp-fu browse-at-remote bind-map auto-yasnippet auto-compile ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
