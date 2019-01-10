@@ -10,7 +10,6 @@ zplug "plugins/tmux", from:oh-my-zsh
 #zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/brew", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 
 # Python
 zplug "plugins/python", from:oh-my-zsh
