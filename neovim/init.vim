@@ -62,22 +62,8 @@ Plug 'marijnh/tern_for_vim'
 Plug 'Raimondi/delimitMate'
 Plug 'kovisoft/slimv'
 
-" Haskell
-Plug 'eagletmt/neco-ghc'
-Plug 'mixmaster/intero-neovim'
-" Plug 'eagletmt/ghcmod-vim'
-Plug 'alx741/vim-hindent'
-
 " Vimscript
 Plug 'Shougo/neco-vim'
-
-" Kotlin
-Plug 'udalov/kotlin-vim'
-
-" Go
-Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'jodosha/vim-godebug'
 
 " User Interface
 Plug 'vim-scripts/Improved-AnsiEsc'
@@ -117,7 +103,7 @@ set wildmenu
 set t_Co=256
 set background=dark
 
-if (has("termguicolors"))
+if (has('termguicolors'))
   set termguicolors
 endif
 
@@ -141,9 +127,9 @@ augroup markdown
 augroup END
 
 " Vim-supertab
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 
-" Vim-Pencil
+"Vim-Pencil
 let g:pencil#wrapModeDefault = 'soft'
 augroup pencil
   autocmd!
@@ -152,28 +138,34 @@ augroup pencil
 augroup END
 
 " Vim-UtilSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsEditSplit='vertical'
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
 function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "") . "\<CR>"
+  return (pumvisible() ? '\<C-y>' : '') . '\<CR>'
   " For no inserting <CR> key.
-  " return pumvisible() ? "\<C-y>" : "\<CR>"
+  " return pumvisible() ? '\<C-y>' : '\<CR>'
 endfunction
 
 " Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" inoremap <expr><Space> pumvisible() ? '\<C-y>' : '\<Space>'
 
-" Mapping Keys
+" Mapping Keys and timeout
 
-let mapleader = "\<space>"
+let mapleader = '\<space>'
 inoremap fd <esc>
-inoremap <esc> <nop>
+vnoremap fd <esc>
+cnoremap fd <esc>
+onoremap fd <esc>
+if has('nvim')
+  tnoremap fd <C-\><C-n>
+endif
+set timeout timeoutlen=500 ttimeoutlen=100
 nnoremap <leader>o :CtrlP<CR>
 nnoremap <leader>w :w<CR>
 vmap <leader>y "+y
@@ -192,7 +184,7 @@ map <leader>m :TagbarToggle<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 " <TAB>: completion.
-inoremap <expr><TAB>    pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB>    pumvisible() ? '\<C-n>' : '\<TAB>'
 
 " Editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp:/.*']
@@ -225,64 +217,4 @@ endif
 " Slimv
 let g:slimv_swank_cmd = '! mate-terminal -e sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp &'
 
-" Haskell
-let g:haskell_tabular = 1
-
-vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
-
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-nnoremap <leader>hio :InteroOpen<CR>
-nnoremap <leader>hik :InteroKill<CR>
-nnoremap <leader>hic :InteroHide<CR>
-nnoremap <leader>hil :InteroLoadCurrentModule<CR>
-nnoremap <leader>hif :InteroLoadCurrentFile<CR>
-nnoremap <leader>hie :InteroEval<CR>
-nnoremap <leader>hit :InteroGenericType<CR>
-nnoremap <leader>hiT :InteroType<CR>
-nnoremap <leader>hii :InteroInfo<CR>
-nnoremap <leader>hiI :InteroTypeInsert<CR>
-nnoremap <leader>hid :InteroGoToDef<CR>
-nnoremap <leader>hiu :InteroUses<CR>
-
 autocmd! BufWritePost *.hs InteroReload
-
-" Go
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
-au FileType go nmap <Leader>rs <Plug>(go-run-split)
-au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_term_enabled = 1
-let g:go_list_type = "quickfix"
-let g:go_addtags_transform = "camelcase"
-
-augroup vg
-au FileType go nmap <Leader>, :GoAlternate<CR>
-au FileType go nmap <Leader>t :GoTest
-au FileType go nmap <Leader>T :GoTestFunc
-"au FileType go nmap <Leader>b :GoBuild<CR>
-" au FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-au FileType go nmap <Leader>cr :GoCallers<CR>
-au FileType go nmap <Leader>ce :GoCallees<CR>
-au FileType go nmap <Leader>? :GoCoverageToggle<CR>
-au FileType go nmap <Leader>r :GoReferrers<CR>
-au FileType go nmap <Leader>d :GoDef<CR>
-au FileType go nmap <Leader>D :GoDefPop<CR>
-au FileType go nmap <Leader>v :GoImplements<CR>
-au FileType go nmap <Leader>I :GoImports<CR>
-au FileType go nmap <Leader>i :GoInstall<CR>
-au FileType go nmap <Leader>p :GoPlay<CR>
-au FileType go nmap <Leader>' :GoDocBrowser<CR>
-au FileType go nmap <Leader>/ :GoInfo<CR>
-au FileType go nmap <Leader>b :GoToggleBreakpoint<CR>
-au FileType go nmap <Leader>db :GoDebug<CR>
-au FileType go nmap <Leader>e :Refactor extract
-augroup END
