@@ -1,46 +1,50 @@
-source "$HOME/.zplug/init.zsh"
+source "$HOME/.antigen/antigen.zsh"
+
+antigen use oh-my-zsh
+
+if [[ `uname` == 'Darwin' ]]; then
+  antigen bundle osx
+fi
 
 # General
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/history", from:oh-my-zsh
-zplug "plugins/systemd", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+antigen bundle command-not-found
+antigen bundle docker
+antigen bundle git
+antigen bundle history
+antigen bundle systemd
+antigen bundle tmux
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Python
-zplug "plugins/python", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/pyenv", from:oh-my-zsh
-zplug "plugins/virtualenv", from:oh-my-zsh
+antigen bundle python
+antigen bundle pip
+antigen bundle pyenv
+antigen bundle virtualenv
 
 # Ruby
-zplug "plugins/ruby", from:oh-my-zsh
-zplug "plugins/rake", from:oh-my-zsh
-zplug "plugins/gem", from:oh-my-zsh
-zplug "plugins/bundler", from:oh-my-zsh
-zplug "plugins/rails", from:oh-my-zsh
-zplug "plugins/rbenv", from:oh-my-zsh
+antigen bundle ruby
+antigen bundle rake
+antigen bundle gem
+antigen bundle bundler
+antigen bundle rails
+antigen bundle rbenv
 
 # JavaScript
-zplug "plugins/node", from:oh-my-zsh
-zplug "plugins/npm", from:oh-my-zsh
-zplug "plugins/npx", from:oh-my-zsh
-zplug "plugins/nvm", from:oh-my-zsh
-zplug "plugins/gulp", from:oh-my-zsh
-zplug "plugins/grunt", from:oh-my-zsh
-zplug "plugins/yarn", from:oh-my-zsh
+antigen bundle node
+antigen bundle npm
+antigen bundle npx
+antigen bundle gulp
+antigen bundle grunt
+antigen bundle yarn
 
 # Others
-zplug "plugins/lein", from:oh-my-zsh
-zplug "plugins/cabal", from:oh-my-zsh
-zplug "plugins/stack", from:oh-my-zsh
+antigen bundle lein
+antigen bundle cabal
+antigen bundle stack
 
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, as:theme
-
-zplug load
+# Theme
+antigen theme denysdovhan/spaceship-prompt
 
 # NVM
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
