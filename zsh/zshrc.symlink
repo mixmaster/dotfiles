@@ -4,7 +4,6 @@ antigen use oh-my-zsh
 
 if [[ `uname` == 'Darwin' ]]; then
   antigen bundle osx
-  antigen bundle brew
 fi
 
 # General
@@ -14,7 +13,7 @@ antigen bundle git
 antigen bundle history
 antigen bundle systemd
 antigen bundle tmux
-antigen bundle zsh-users/zsh-completions src
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Python
@@ -34,6 +33,7 @@ antigen bundle rbenv
 # JavaScript
 antigen bundle node
 antigen bundle npm
+antigen bundle npx
 antigen bundle gulp
 antigen bundle grunt
 antigen bundle yarn
@@ -43,12 +43,8 @@ antigen bundle lein
 antigen bundle cabal
 antigen bundle stack
 
-# Pure theme
-#antigen bundle mafredri/zsh-async
-#antigen bundle sindresorhus/pure
-
-#antigen theme caiogondim/bullet-train-oh-my-zsh-theme bullet-train
-antigen theme denysdovhan/spaceship-zsh-theme spaceship
+# Theme
+antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
 
