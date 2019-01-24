@@ -68,6 +68,7 @@ This function should only modify configuration layer settings."
      multiple-cursors
      neotree
      python
+     racket
      react
      ;ruby-on-rails
      (ranger :variables
@@ -525,6 +526,9 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; editorconfig-mode
   (editorconfig-mode 1)
+
+  ;; evil-cleverparens for all suppored modes
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
