@@ -179,10 +179,6 @@ nmap <leader><leader> V
 map <leader>n :NERDTreeToggle<CR>
 map <leader>m :TagbarToggle<CR>
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-
 " <TAB>: completion.
 inoremap <expr><TAB>    pumvisible() ? '\<C-n>' : '\<TAB>'
 
