@@ -47,6 +47,3 @@ antigen bundle stack
 antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
-
-# NVM
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
