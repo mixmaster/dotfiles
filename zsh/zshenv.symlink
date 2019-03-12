@@ -12,3 +12,8 @@ if [[ -d "$HOME/.nvm" && -x "$(command -v brew)" ]]; then
   export NVM_DIR="$HOME/.nvm"
   . "$(brew --prefix nvm)/nvm.sh"
 fi
+
+# Flutter
+if [[ -x "$HOME/Applications/flutter/bin/flutter" ]]; then
+  export PATH="$PATH:$HOME/Applications/flutter/bin"
+fi
