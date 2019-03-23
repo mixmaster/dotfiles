@@ -75,6 +75,7 @@ This function should only modify configuration layer settings."
              ranger-show-preview t
              ranger-cleanup-on-disable t)
      ;ruby
+     scheme
      (shell :variables
             shell-default-shell 'multi-term
             shell-default-height 30
@@ -529,6 +530,13 @@ before packages are loaded."
 
   ;; evil-cleverparens for all suppored modes
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
+
+  ;; Active Scheme implementations and Scheme binary
+  (if (string= system-type "darwin")
+    (progn
+      (setq geiser-chez-binary "chez")
+      (setq geiser-active-implementations '(chez)))
+    (setq geiser-active-implementations '(racket)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
