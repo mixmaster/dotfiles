@@ -38,11 +38,6 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'neomake/neomake'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
-" Markdown
-Plug 'reedes/vim-pencil'
-Plug 'tpope/vim-markdown'
-Plug 'jtratner/vim-flavored-markdown'
-
 " Git Support
 Plug 'kablamo/vim-git-log'
 Plug 'gregsexton/gitv'
@@ -55,7 +50,6 @@ Plug 'zchee/deoplete-jedi'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'leafgarland/typescript-vim'
 Plug 'marijnh/tern_for_vim'
 
 " Lisp / Clojure
@@ -69,7 +63,7 @@ Plug 'Shougo/neco-vim'
 Plug 'vim-scripts/Improved-AnsiEsc'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/oceanic-next'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'ryanoasis/vim-devicons'
 
 " All of your plugins must be added before the following line
@@ -107,7 +101,7 @@ if (has('termguicolors'))
   set termguicolors
 endif
 
-colorscheme OceanicNext
+colorscheme PaperColor
 
 " Vim-Airline
 let g:airline#extension#tabline#enabled = 1
@@ -115,27 +109,13 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = 'hybrid'
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
-let g:airline_theme = 'oceanicnext'
+let g:airline_theme='papercolor'
 
 " neomake
 autocmd! BufWritePost * Neomake
 
-" Markdown
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
-augroup END
-
 " Vim-supertab
 let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
-
-"Vim-Pencil
-let g:pencil#wrapModeDefault = 'soft'
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-augroup END
 
 " Vim-UtilSnips
 let g:UltiSnipsExpandTrigger='<tab>'
@@ -146,18 +126,9 @@ let g:UltiSnipsEditSplit='vertical'
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
-function! s:my_cr_function()
-  return (pumvisible() ? '\<C-y>' : '') . '\<CR>'
-  " For no inserting <CR> key.
-  " return pumvisible() ? '\<C-y>' : '\<CR>'
-endfunction
-
-" Close popup by <Space>.
-" inoremap <expr><Space> pumvisible() ? '\<C-y>' : '\<Space>'
-
 " Mapping Keys and timeout
 
-let mapleader = '\<space>'
+let mapleader = "\<space>"
 inoremap fd <esc>
 vnoremap fd <esc>
 cnoremap fd <esc>
@@ -188,9 +159,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp:/.*']
 " delimitMate
 au! FileType lisp,clojure let b:loaded_delimitMate=1
 
-" Typescript
-let g:typescript_compiler_options = '-sourcemap'
-
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -212,5 +180,3 @@ endif
 
 " Slimv
 let g:slimv_swank_cmd = '! mate-terminal -e sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp &'
-
-autocmd! BufWritePost *.hs InteroReload
