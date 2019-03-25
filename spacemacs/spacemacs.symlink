@@ -532,11 +532,10 @@ before packages are loaded."
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
   ;; Active Scheme implementations and Scheme binary
+  (setq geiser-active-implementations '(chez))
   (if (string= system-type "darwin")
-    (progn
-      (setq geiser-chez-binary "chez")
-      (setq geiser-active-implementations '(chez)))
-    (setq geiser-active-implementations '(racket)))
+    (setq geiser-chez-binary "chez")
+    (setq geiser-chez-binary "chez-scheme"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
