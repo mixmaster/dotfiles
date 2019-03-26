@@ -531,11 +531,18 @@ before packages are loaded."
   ;; evil-cleverparens for all suppored modes
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
-  ;; Active Scheme implementations and Scheme binary
-  (setq geiser-active-implementations '(chez))
-  (if (string= system-type "darwin")
-    (setq geiser-chez-binary "chez")
-    (setq geiser-chez-binary "chez-scheme"))
+  ;; set active Scheme implementations and Scheme binaries.
+  (setq geiser-active-implementations '())
+  (let ((scheme-imps '(chez chicken racket))
+         (scheme-execs '(chez ("scheme" "chez" "chez-scheme")
+                          chicken ("csi" "chicken-csi")
+                          racket ("racket"))))
+    (dolist (imp scheme-imps)
+      (when-let ((exec (loop for e in (plist-get scheme-execs imp)
+                         when (executable-find e)
+                         return e)))
+        (add-to-list 'geiser-active-implementations imp)
+        (set (intern (concat "geiser-" (symbol-name imp) "-binary")) exec))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
