@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
      common-lisp
+     crystal
      emacs-lisp
      git
      (go :variables
@@ -68,7 +69,6 @@ This function should only modify configuration layer settings."
      multiple-cursors
      neotree
      python
-     racket
      react
      ;ruby-on-rails
      (ranger :variables
