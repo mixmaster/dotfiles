@@ -75,6 +75,7 @@ This function should only modify configuration layer settings."
              ranger-show-preview t
              ranger-cleanup-on-disable t)
      ;ruby
+     scala
      scheme
      (shell :variables
             shell-default-shell 'multi-term
