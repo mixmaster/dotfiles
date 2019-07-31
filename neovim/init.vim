@@ -37,7 +37,7 @@ Plug 'airblade/vim-gitgutter'         " shows a git diff inteh gutter and stages
 " User Interface
 Plug 'vim-scripts/Improved-AnsiEsc'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/seoul256.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'ryanoasis/vim-devicons'
 
 " All of your plugins must be added before the following line
@@ -76,11 +76,11 @@ if (has('termguicolors'))
   set termguicolors
 endif
 
-colorscheme seoul256
+colorscheme nord
 
 " lightline
 let g:lightline = {
-  \ 'colorscheme': 'seoul256'
+  \ 'colorscheme': 'nord'
   \ }
 
 " fd
