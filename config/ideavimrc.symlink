@@ -1,0 +1,15 @@
+let mapleader = "\<space>"
+inoremap fd <esc>
+vnoremap fd <esc>
+cnoremap fd <esc>
+onoremap fd <esc>
+set timeout timeoutlen=500 ttimeoutlen=100
+nnoremap <leader>o :CtrlP<CR>
+nnoremap <leader>w :w<CR>
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+nmap <leader><leader> V
