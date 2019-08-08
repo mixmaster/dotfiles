@@ -17,3 +17,14 @@ fi
 if [[ -x "$HOME/Applications/flutter/bin/flutter" ]]; then
   export PATH="$PATH:$HOME/Applications/flutter/bin"
 fi
+
+# GraalVM
+if [[ -x "$HOME/Applications/graalvm/bin/java" ]] then
+  export JAVA_HOME="$HOME/Applications/graalvm"
+elif [[ -x "$HOME/Applications/graalvm/Contents/Home/bin/java" ]] then
+  export JAVA_HOME="$HOME/Applications/graalvm/Contents/Home"
+fi
+
+if [[ "$JAVA_HOME" != "" ]] then
+  export PATH="$JAVA_HOME/bin:$PATH"
+fi

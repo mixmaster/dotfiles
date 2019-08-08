@@ -13,3 +13,4 @@ nmap <leader>P "+P
 vmap <leader>p "+p
 vmap <leader>P "+P
 nmap <leader><leader> V
+set ideajoin
