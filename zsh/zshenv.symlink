@@ -28,3 +28,8 @@ fi
 if [[ "$JAVA_HOME" != "" ]] then
   export PATH="$JAVA_HOME/bin:$PATH"
 fi
+
+# Haskll
+if [[ `which cabal` != '' ]]; then
+  export PATH="$PATH:$HOME/.cabal/bin"
+fi
