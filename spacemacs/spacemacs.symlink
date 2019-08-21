@@ -543,6 +543,10 @@ before packages are loaded."
                          return e)))
         (add-to-list 'geiser-active-implementations imp)
         (set (intern (concat "geiser-" (symbol-name imp) "-binary")) exec))))
+
+  ;; add executables installed by Cabal into path on Mac
+  (when (string-equal system-type "darwin")
+    (add-to-list 'exec-path "~/.cabal/bin/"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
