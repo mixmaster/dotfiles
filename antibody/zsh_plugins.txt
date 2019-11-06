@@ -1,0 +1,16 @@
+robbyrussell/oh-my-zsh folder:lib
+robbyrussell/oh-my-zsh path:plugins/docker
+robbyrussell/oh-my-zsh path:plugins/history
+robbyrussell/oh-my-zsh path:plugins/git
+robbyrussell/oh-my-zsh path:plugins/node
+robbyrussell/oh-my-zsh path:plugins/npm
+robbyrussell/oh-my-zsh path:plugins/python
+robbyrussell/oh-my-zsh path:plugins/scala
+rupa/z
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+
+# these should be at last!
+denysdovhan/spaceship-prompt
+zdharma/fast-syntax-highlighting
+zsh-users/zsh-history-substring-search

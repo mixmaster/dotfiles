@@ -1,49 +1,37 @@
-source "$HOME/.antigen/antigen.zsh"
+# History
+[ -z "$HISTSIZE" ] && HISTSIZE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt inc_append_history
+setopt share_history
 
-antigen use oh-my-zsh
+# Changing directories
+setopt auto_cd
+setopt auto_pushd
+unsetopt pushd_ignore_dups
+setopt pushdminus
 
-if [[ `uname` == 'Darwin' ]]; then
-  antigen bundle osx
-fi
+# Completion
+setopt auto_menu
+setopt always_to_end
+setopt complete_in_word
+unsetopt flow_control
+unsetopt menu_complete
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 
-# General
-antigen bundle command-not-found
-antigen bundle docker
-antigen bundle git
-antigen bundle history
-antigen bundle systemd
-antigen bundle tmux
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
+# Other
+setopt prompt_subst
 
-# Python
-antigen bundle python
-antigen bundle pip
-antigen bundle pyenv
-antigen bundle virtualenv
-
-# Ruby
-antigen bundle ruby
-antigen bundle rake
-antigen bundle gem
-antigen bundle bundler
-antigen bundle rails
-antigen bundle rbenv
-
-# JavaScript
-antigen bundle node
-antigen bundle npm
-antigen bundle npx
-antigen bundle gulp
-antigen bundle grunt
-antigen bundle yarn
-
-# Others
-antigen bundle lein
-antigen bundle cabal
-antigen bundle stack
-
-# Theme
-antigen theme denysdovhan/spaceship-prompt
-
-antigen apply
+DISABLE_AUTO_UPDATE=true
+ZSH_DISABLE_COMPFIX=true
+ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+source "$HOME/.zsh_plugins.sh"
