@@ -1,7 +1,40 @@
+#!/usr/bin/env zsh
+
+export DOTFILES="$HOME/.dotfiles"
+
+typeset -U config_files
+cnofig_files=($DOTFILES/*/*.zsh)
+
+# load the path files
+for file in ${(M)config_files:#*/path.zsh}; do
+  source "$file"
+done
+
+# load antibody plugins
+DISABLE_AUTO_UPDATE=true
+ZSH_DISABLE_COMPFIX=true
+ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+source ~/.zsh_plugins.sh
+
+# load everything but the path and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+  source "$file"
+done
+
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+
+# load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.zsh}; do
+  source "$file"
+done
+
+unset config_files updated_at
+
 # History
-[ -z "$HISTSIZE" ] && HISTSIZE="$HOME/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=10000
 setopt extended_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
@@ -15,23 +48,5 @@ setopt auto_pushd
 unsetopt pushd_ignore_dups
 setopt pushdminus
 
-# Completion
-setopt auto_menu
-setopt always_to_end
-setopt complete_in_word
-unsetopt flow_control
-unsetopt menu_complete
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
 # Other
 setopt prompt_subst
-
-DISABLE_AUTO_UPDATE=true
-ZSH_DISABLE_COMPFIX=true
-ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
-source "$HOME/.zsh_plugins.sh"
