@@ -2,7 +2,7 @@ robbyrussell/oh-my-zsh folder:lib
 robbyrussell/oh-my-zsh path:plugins/docker
 robbyrussell/oh-my-zsh path:plugins/history
 robbyrussell/oh-my-zsh path:plugins/git
-rubbyrussell/oh-my-zsh path:plugins/minikube
+robbyrussell/oh-my-zsh path:plugins/minikube
 robbyrussell/oh-my-zsh path:plugins/node
 robbyrussell/oh-my-zsh path:plugins/npm
 robbyrussell/oh-my-zsh path:plugins/python
