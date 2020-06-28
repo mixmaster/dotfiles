@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-rbenv_exec=$(which rbenv)
+rbenv_exec=$(command -v rbenv)
 
 if [ -x "$rbenv_exec" ] ; then
   eval "$(rbenv init -)"
