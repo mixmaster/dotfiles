@@ -52,3 +52,53 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; I prefer esc sequence to "fd" instead of "jk".
+(setq-default evil-escape-key-sequence "fd")
+
+;; No annoying confirmation message at exit.
+(setq-default confirm-kill-emacs nil)
+
+;; Better defaults
+(setq-default
+  delete-by-moving-to-trash t
+  uniquify-buffer-name-style 'forward
+  window-combination-resize t
+  x-stretch-cursor t)
+
+(setq undo-limit 80000000
+  evil-want-fine-undo t
+  auto-save-default t
+  inhibit-compacting-font-caches t
+  truncate-string-ellipsis "...")
+
+(delete-selection-mode 1)
+(display-time-mode 1)
+(unless (equal "Battery status not available"
+          (battery))
+  (display-battery-mode 1))
+(global-subword-mode 1)
+
+(setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+(setq evil-vsplit-window-right t
+  evil-split-window-below t)
+
+(defadvice! prompt-for-buffer (&rest _)
+  :after '(evil-window-split evil-window-vsplit)
+  (+ivy/switch-))
+(setq +ivy-buffer-preview t)
+
+(map! :map evil-window-map
+  "SPC" #'rotate-layout)
+
+;; Visual settings
+(setq doom-font (font-spec :family "JetBrains Mono")
+  doom-big-font (font-spec :family "JetBrains Mono")
+  doom-variable-pitch-font (font-spec :family "Overpass Mono")
+  doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+
+(setq doom-theme 'doom-vibrant)
+(delq! t custom-theme-load-path)
