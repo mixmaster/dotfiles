@@ -2,10 +2,10 @@
 
 set -e
 
-fonts_ver="v2.0.0"
+fonts_ver="v2.1.0"
 base_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${fonts_ver}"
 font_dir="${HOME}/.local/share/fonts"
-sel_fonts="DejaVuSansMono Hack InconsolataGo LiberationMono Meslo SourceCodePro UbuntuMono"
+sel_fonts="Hack IBMPlexMono JetBrainsMono ProFont SourceCodePro"
 
 mkdir -p "${font_dir}"
 
