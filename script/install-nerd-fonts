@@ -5,7 +5,7 @@ set -e
 fonts_ver="v2.1.0"
 base_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${fonts_ver}"
 font_dir="${HOME}/.local/share/fonts"
-sel_fonts="Hack IBMPlexMono JetBrainsMono ProFont SourceCodePro"
+sel_fonts="Hack IBMPlexMono JetBrainsMono Overpass ProFont SourceCodePro"
 
 mkdir -p "${font_dir}"
 
