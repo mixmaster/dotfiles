@@ -157,22 +157,9 @@ install_and_configure_neovim () {
   link_file "$DOTFILES_ROOT/neovim/init.vim" "$HOME/.config/nvim/init.vim"
 }
 
-configure_konsole () {
-  if [ -x "$(command -v konsole)" ]
-  then
-    info "configuring Konsole"
-    mkdir -p "$HOME/.local/share/konsole"
-    link_file "$DOTFILES_ROOT/nord/nord.colorscheme" "$HOME/.local/share/konsole/nord.colorscheme"
-    success "configred Konsole"
-  else
-    info "no Konsole installed"
-  fi
-}
-
 setup_gitconfig
 install_dotfiles
 install_and_configure_neovim
-configure_konsole
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]

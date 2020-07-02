@@ -95,10 +95,17 @@
   "SPC" #'rotate-layout)
 
 ;; Visual settings
-(setq doom-font (font-spec :family "JetBrains Mono")
-  doom-big-font (font-spec :family "JetBrains Mono")
+(setq doom-font (font-spec :family "Hack Nerd Font Mono")
+  doom-big-font (font-spec :family "Hack Nerd Font Mono")
   doom-variable-pitch-font (font-spec :family "Overpass Mono")
   doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
 (setq doom-theme 'doom-vibrant)
 (delq! t custom-theme-load-path)
+
+(defun doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case."
+  (setq-local doom-modeline-buffer-encoding
+    (unless (or (eq buffer-file-coding-system 'utf-8-unix)
+              (eq buffer-file-coding-system 'utf-8)))))
+(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
