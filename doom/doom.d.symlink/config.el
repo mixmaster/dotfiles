@@ -23,7 +23,7 @@
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 15)
   doom-big-font (font-spec :family "Hack Nerd Font Mono" :size 18)
-  doom-variable-pitch-font (font-spec :family "OverpassMono Nerd" :size 15)
+  doom-variable-pitch-font (font-spec :family "Overpass Nerd Font" :size 15)
   doom-serif-font (font-spec :family "BlexMono NF" :weight 'light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
