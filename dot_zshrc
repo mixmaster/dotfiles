@@ -1,0 +1,64 @@
+# load zgenom
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+    echo "Creating a zgenom save"
+
+    # Add this if you experience issues with missing completions or errors mentioning compdef.
+    # zgenom compdef
+
+    # Ohmyzsh base library
+    zgenom ohmyzsh
+
+    # You can also cherry pick just parts of the base library.
+    # Not loading the base set of ohmyzsh libraries might lead to issues.
+    # While you can do it, I won't recommend it unless you know how to fix
+    # those issues yourself.
+
+    # Remove `zgenom ohmyzsh` and load parts of ohmyzsh like this:
+    # `zgenom ohmyzsh path/to/file.zsh`
+    # zgenom ohmyzsh lib/git.zsh # load git library of ohmyzsh
+
+    # plugins
+    zgenom ohmyzsh plugins/command-not-found
+    zgenom ohmyzsh plugins/common-aliases
+    zgenom ohmyzsh plugins/copybuffer
+    zgenom ohmyzsh plugins/copyfile
+    zgenom ohmyzsh plugins/copypath
+    zgenom ohmyzsh plugins/dirhistory
+    zgenom ohmyzsh plugins/git
+    zgenom ohmyzsh plugins/history
+    zgenom ohmyzsh plugins/history-substring-search
+    zgenom ohmyzsh plugins/sudo
+    zgenom ohmyzsh plugins/z
+
+    # Install ohmyzsh osx plugin if on macOS
+    [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
+
+    # bulk load
+    zgenom loadall <<EOPLUGINS
+        zsh-users/zsh-syntax-highlighting
+        zsh-users/zsh-history-substring-search
+        zsh-users/zsh-autosuggestions
+        zsh-users/zsh-completions
+EOPLUGINS
+    # ^ can't indent this EOPLUGINS
+
+    # theme
+    zgenom load sindresorhus/pure
+
+    # save all to init script
+    zgenom save
+
+    # Compile your zsh files
+    zgenom compile "$HOME/.zshrc"
+
+    # You can perform other "time consuming" maintenance tasks here as well.
+    # If you use `zgenom autoupdate` you're making sure it gets
+    # executed every 7 days.
+fi
