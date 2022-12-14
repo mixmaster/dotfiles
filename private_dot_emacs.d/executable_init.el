@@ -173,6 +173,21 @@
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
+;; Completion with Corfu
+
+(use-package corfu
+  :custom
+  (corfu-auto t)
+  :init
+  (global-corfu-mode))
+
+(use-package emacs
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq read-extended-command-predicate
+	#'command-completion-default-include-p)
+  (setq tab-always-indent 'complete))
+
 ;; Projectile Configuration
 
 (use-package projectile
