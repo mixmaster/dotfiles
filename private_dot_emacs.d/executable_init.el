@@ -1,4 +1,25 @@
-;; You will most likely need to adjust this font size for your system!
+;; User straight.el for package management
+(setq package-enable-at-startup nil)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+
+(setq straight-use-package-by-default t)
+
+;; Font Configuration
+
 (defvar efs/default-font-size 140)
 (defvar efs/default-variable-font-size 140)
 
@@ -11,52 +32,25 @@
 
 (menu-bar-mode -1)              ; Disable the menu bar
 
-(setq visible-bell t)           ; Set up the visible bell
-
 (setq custom-file (concat user-emacs-directory "/custom.el"))
-
-;; Font Configuration ----------------------------------------------------------
 
 (set-face-attribute 'default nil :font "SauceCodePro Nerd Font" :height efs/default-font-size)
 
-;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil :font "SauceCodePro Nerd Font" :height efs/default-font-size)
 
-;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Overpass Nerd Font" :height efs/default-variable-font-size :weight 'regular)                                
+(set-face-attribute 'variable-pitch nil :font "Overpass Nerd Font" :height efs/default-variable-font-size :weight 'regular)
 
-;; Package Manager Configuration -----------------------------------------------
-
-;; Initialiize package sources
-(require 'package)
-
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
+;; Line and column numbers
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
-
-;; Disable line numbers for some modes
+    
 (dolist (mode '(org-mode-hook
 		term-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(use-package command-log-mode)
-
-;; Ivy Configuration -----------------------------------------------------------
+;; Ivy Configuration
 
 (use-package ivy
   :diminish
@@ -75,8 +69,7 @@
   :config
   (ivy-mode 1))
 
-(use-package swiper
-  :ensure t)
+(use-package swiper)
 
 (global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
 
@@ -89,12 +82,11 @@
 (use-package all-the-icons)
 
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
 (use-package doom-themes
-  :init (load-theme 'doom-dracula t))
+  :init (load-theme 'doom-one t))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -126,9 +118,7 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-;; Key Binding Configuration ---------------------------------------------------
-
-;; Make ESC quit prompts
+; Make Esc quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package general
@@ -161,9 +151,16 @@
   (evil-set-initial-state 'dashboard-mode 'normal))
 
 (use-package evil-collection
-  :after eval
+  :after evil
   :config
   (evil-collection-init))
+
+(use-package evil-escape
+  :after evil
+  :config
+  (setq-default evil-escape-key-sequence "fd")
+  (setq-default evil-escape-delay 0.2)
+  (evil-escape-mode 1))
 
 (use-package hydra)
 
@@ -176,7 +173,7 @@
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
-;; Projectile Configuration ----------------------------------------------------
+;; Projectile Configuration
 
 (use-package projectile
   :diminish projectilemode
@@ -192,7 +189,7 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
-;; Magit Configuration ---------------------------------------------------------
+;; Magit Configuration
 
 (use-package magit
   :custom
@@ -208,7 +205,7 @@
   (variable-pitch-mode 1)
   (visual-line-mode 1))
 
-;; Org Mode Configuration ------------------------------------------------------
+;; Org Mode Configuration
 
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -255,3 +252,5 @@
 
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
+
+(use-package sly)
