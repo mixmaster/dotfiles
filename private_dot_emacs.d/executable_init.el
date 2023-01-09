@@ -1,23 +1,3 @@
-;; User straight.el for package management
-(setq package-enable-at-startup nil)
-
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-(straight-use-package 'use-package)
-
-(setq straight-use-package-by-default t)
-
 ;; Font Configuration
 
 (defvar efs/default-font-size 140)
@@ -50,6 +30,25 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Package Management
+
+(require 'package)
+
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Initialize use-package on non-Linux platforms
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 ;; Ivy Configuration
 
 (use-package ivy
@@ -69,7 +68,8 @@
   :config
   (ivy-mode 1))
 
-(use-package swiper)
+(use-package swiper
+  :ensure t)
 
 (global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
 
@@ -82,6 +82,7 @@
 (use-package all-the-icons)
 
 (use-package doom-modeline
+  :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
@@ -121,57 +122,57 @@
 ; Make Esc quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-(use-package general
-  :config
-  (general-create-definer rune/leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "C-SPC")
+;; (use-package general
+;;   :config
+;;   (general-create-definer rune/leader-keys
+;;     :keymaps '(normal insert visual emacs)
+;;     :prefix "SPC"
+;;     :global-prefix "C-SPC")
 
-  (rune/leader-keys
-    "t"  '(:ignore t :which-key "toggles")
-    "tt" '(counsel-load-theme :which-key "choose theme")))
+;;   (rune/leader-keys
+;;     "t"  '(:ignore t :which-key "toggles")
+;;     "tt" '(counsel-load-theme :which-key "choose theme")))
 
-(use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+;; (use-package evil
+;;   :init
+;;   (setq evil-want-integration t)
+;;   (setq evil-want-keybinding nil)
+;;   (setq evil-want-C-u-scroll t)
+;;   (setq evil-want-C-i-jump nil)
+;;   :config
+;;   (evil-mode 1)
+;;   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+;;   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-  ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+;;   ;; Use visual line motions even outside of visual-line-mode buffers
+;;   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+;;   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+;;   (evil-set-initial-state 'messages-buffer-mode 'normal)
+;;   (evil-set-initial-state 'dashboard-mode 'normal))
 
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+;; (use-package evil-collection
+;;   :after evil
+;;   :config
+;;   (evil-collection-init))
 
-(use-package evil-escape
-  :after evil
-  :config
-  (setq-default evil-escape-key-sequence "fd")
-  (setq-default evil-escape-delay 0.2)
-  (evil-escape-mode 1))
+;; (use-package evil-escape
+;;   :after evil
+;;   :config
+;;   (setq-default evil-escape-key-sequence "fd")
+;;   (setq-default evil-escape-delay 0.2)
+;;   (evil-escape-mode 1))
 
-(use-package hydra)
+;; (use-package hydra)
 
-(defhydra hydra-text-scale (:timeout 4)
-  "scale text"
-  ("j" text-scale-increase "in")
-  ("k" text-scale-decrease "out")
-  ("f" nil "finished" :exit t))
+;; (defhydra hydra-text-scale (:timeout 4)
+;;   "scale text"
+;;   ("j" text-scale-increase "in")
+;;   ("k" text-scale-decrease "out")
+;;   ("f" nil "finished" :exit t))
 
-(rune/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text"))
+;; (rune/leader-keys
+;;   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
 ;; Completion with Corfu
 
@@ -268,4 +269,5 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
-(use-package sly)
+(use-package sly
+  :ensure t)
