@@ -1,7 +1,7 @@
 ;; Font Configuration
 
-(defvar efs/default-font-size 140)
-(defvar efs/default-variable-font-size 140)
+(defvar efs/default-font-size 100)
+(defvar efs/default-variable-font-size 100)
 
 (setq inhibit-startup-message t)
 
@@ -9,14 +9,15 @@
 (tool-bar-mode -1)              ; Disable the toolbar
 (tooltip-mode -1)               ; Disable tooltips
 (set-fringe-mode 10)            ; Give some breathing room
-
 (menu-bar-mode -1)              ; Disable the menu bar
+(desktop-save-mode 1)           ; Save sessions
 
+(setq make-backup-files nil)    ; Disable creating backup~ files
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
-(set-face-attribute 'default nil :font "SauceCodePro Nerd Font" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "ProFontIIx Nerd Font" :height efs/default-font-size)
 
-(set-face-attribute 'fixed-pitch nil :font "SauceCodePro Nerd Font" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "ProFontIIx Nerd Font" :height efs/default-font-size)
 
 (set-face-attribute 'variable-pitch nil :font "Overpass Nerd Font" :height efs/default-variable-font-size :weight 'regular)
 
