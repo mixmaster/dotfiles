@@ -15,9 +15,9 @@
 (setq make-backup-files nil)    ; Disable creating backup~ files
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
-(set-face-attribute 'default nil :font "ProFontIIx Nerd Font" :height efs/default-font-size)
+(set-face-attribute 'default nil :font "ProFont IIx Nerd Font" :height efs/default-font-size)
 
-(set-face-attribute 'fixed-pitch nil :font "ProFontIIx Nerd Font" :height efs/default-font-size)
+(set-face-attribute 'fixed-pitch nil :font "ProFont IIx Nerd Font" :height efs/default-font-size)
 
 (set-face-attribute 'variable-pitch nil :font "Overpass Nerd Font" :height efs/default-variable-font-size :weight 'regular)
 
@@ -316,3 +316,38 @@
     (sp-local-pair "~" "~" :unless '(sp-point-after-word-p sp--org-inside-LaTeX))
     (sp-local-pair "=" "=" :unless '(sp-point-after-word-p sp--org-inside-LaTeX))
     (sp-local-pair "\\[" "\\]")))
+
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+(use-package flycheck-clj-kondo)
+
+(use-package clojure-mode
+  :config
+  (require 'flycheck-clj-kondo))
+
+(use-package cider
+  :after clojure-mode
+  :init
+  (progn
+    (add-hook 'clojure-mode-hook 'cider-mode)
+    (add-hook 'clojurescript-mode-hook 'cider-mode)
+    (add-hook 'clojurec-mode-hook 'cider-mode)
+    (add-hook 'cider-repl-mode-hook 'cider-mode))
+  :config
+  (setq cider-repl-display-help-banner nil)
+  (setq cider-auto-mode nil))
+
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+	 (clojure-mode . lsp-deferred)
+	 (clojurescript-mode . lsp-deferred)
+	 (clojurec-mode . lsp-deferred)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-diferred))
+
+(use-package lsp-ui :commands lisp-ui-mode)
+
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
