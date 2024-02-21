@@ -312,8 +312,8 @@ It should only modify the values of Spacemacs settings."
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("ProFont IIx Nerd Font"
-                               :size 13.0
+   dotspacemacs-default-font '("ProFontWindows Nerd Font"
+                               :size 16.0
                                :weight normal
                                :width normal)
 
@@ -610,6 +610,45 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (defun save-framegeometry ()
+    "Gets the current frame's geometry and saves to ~/.emacs.d/.cache/framegeometry."
+    (let ((framegeometry-left (frame-parameter (selected-frame) 'left))
+           (framegeometry-top (frame-parameter (selected-frame) 'top))
+           (framegeometry-width (frame-parameter (selected-frame) 'width))
+           (framegeometry-height (frame-parameter (selected-frame) 'height))
+           (framegeometry-file (expand-file-name "~/.emacs.d/.cache/framegeometry")))
+      (when (not (number-or-marker-p framegeometry-left))
+        (setq framegeometry-left 0))
+      (when (not (number-or-marker-p framegeometry-top))
+        (setq framegeometry-top 0))
+      (when (not (number-or-marker-p framegeometry-width))
+        (setq framegeometry-width 0))
+      (when (not (number-or-marker-p framegeometry-height))
+        (setq framegeometry-height 0))
+
+      (with-temp-buffer
+        (insert
+          ";;; This is the previous emacs frame's geometry.\n"
+          ";;; Last generated " (current-time-string) ".\n"
+          "(setq initial-frame-alist\n"
+          "      '(\n"
+          (format "        (top . %d)\n" (max framegeometry-top 0))
+          (format "        (left . %d)\n" (max framegeometry-left 0))
+          (format "        (width . %d)\n" (max framegeometry-width 0))
+          (format "        (height . %d)))\n" (max framegeometry-height 0)))
+        (when (file-writable-p framegeometry-file)
+          (write-file framegeometry-file)))))
+
+  (defun load-framegeometry ()
+    "Loads ~/.emacs.d/framegeometry which should load the previous frame's geometry."
+    (let ((framegeometry-file (expand-file-name "~/.emacs.d/.cache/framegeometry")))
+      (when (file-readable-p framegeometry-file)
+        (load-file framegeometry-file))))
+
+  (if window-system
+      (progn
+        (add-hook 'after-init-hook 'load-framegeometry)
+        (add-hook 'kill-emacs-hook 'save-fr)))
 )
 
 
@@ -628,8 +667,8 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
-  (desktop-save-mode)
-  (desktop-read)
+  ;; (desktop-save-mode)
+  ;; (desktop-read)
 )
 
 
