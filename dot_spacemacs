@@ -45,6 +45,7 @@ This function should only modify configuration layer settings."
                       auto-completion-idle-delay 0.0
                       auto-completion-minimum-prefix-length 1)
      better-defaults
+     (c-c++ :variable c-c++-backend 'lsp-clangd)
      (clojure :variables
               clojure-enable-kaocha-runner t
               cider-repl-display-help-banner nil
@@ -479,7 +480,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-line-numbers '(:disabled-for-modes dired-mode
                                                    doc-view-mode
                                                    pdf-view-mode
-                               :size-limit-kb 1000)
+                                                   :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -602,7 +603,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -613,10 +614,10 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (defun save-framegeometry ()
     "Gets the current frame's geometry and saves to ~/.emacs.d/.cache/framegeometry."
     (let ((framegeometry-left (frame-parameter (selected-frame) 'left))
-           (framegeometry-top (frame-parameter (selected-frame) 'top))
-           (framegeometry-width (frame-parameter (selected-frame) 'width))
-           (framegeometry-height (frame-parameter (selected-frame) 'height))
-           (framegeometry-file (expand-file-name "~/.emacs.d/.cache/framegeometry")))
+          (framegeometry-top (frame-parameter (selected-frame) 'top))
+          (framegeometry-width (frame-parameter (selected-frame) 'width))
+          (framegeometry-height (frame-parameter (selected-frame) 'height))
+          (framegeometry-file (expand-file-name "~/.emacs.d/.cache/framegeometry")))
       (when (not (number-or-marker-p framegeometry-left))
         (setq framegeometry-left 0))
       (when (not (number-or-marker-p framegeometry-top))
@@ -628,14 +629,14 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
       (with-temp-buffer
         (insert
-          ";;; This is the previous emacs frame's geometry.\n"
-          ";;; Last generated " (current-time-string) ".\n"
-          "(setq initial-frame-alist\n"
-          "      '(\n"
-          (format "        (top . %d)\n" (max framegeometry-top 0))
-          (format "        (left . %d)\n" (max framegeometry-left 0))
-          (format "        (width . %d)\n" (max framegeometry-width 0))
-          (format "        (height . %d)))\n" (max framegeometry-height 0)))
+         ";;; This is the previous emacs frame's geometry.\n"
+         ";;; Last generated " (current-time-string) ".\n"
+         "(setq initial-frame-alist\n"
+         "      '(\n"
+         (format "        (top . %d)\n" (max framegeometry-top 0))
+         (format "        (left . %d)\n" (max framegeometry-left 0))
+         (format "        (width . %d)\n" (max framegeometry-width 0))
+         (format "        (height . %d)))\n" (max framegeometry-height 0)))
         (when (file-writable-p framegeometry-file)
           (write-file framegeometry-file)))))
 
@@ -649,7 +650,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
       (progn
         (add-hook 'after-init-hook 'load-framegeometry)
         (add-hook 'kill-emacs-hook 'save-framegeometry)))
-)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -657,7 +658,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -669,7 +670,7 @@ before packages are loaded."
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
   ;; (desktop-save-mode)
   ;; (desktop-read)
-)
+  )
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -679,17 +680,17 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(clojure-snippets common-lisp-snippets pos-tip forge yaml ghub closql emacsql treepy git-link git-messenger git-modes git-timemachine gitignore-templates helm-c-yasnippet cider sesman parseedn clojure-mode parseclj helm-company helm-git-grep helm-ls-git markdown-mode slime-company company smeargle treemacs-magit magit magit-section git-commit with-editor transient yasnippet-snippets yasnippet ace-link aggressive-indent all-the-icons auto-highlight-symbol centered-cursor-mode clean-aindent-mode column-enforce-mode define-word devdocs dired-quick-sort drag-stuff dumb-jump editorconfig evil-anzu anzu evil-args evil-cleverparens evil-collection annalist evil-easymotion evil-escape evil-exchange evil-goggles evil-iedit-state evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-nerd-commenter evil-numbers evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar expand-region eyebrowse fancy-battery flx-ido flx golden-ratio google-translate helm-purpose hide-comnt highlight-indentation highlight-numbers parent-mode highlight-parentheses hl-todo hungry-delete indent-guide info+ link-hint lorem-ipsum multi-line shut-up open-junk-file org-superstar paradox password-generator popwin rainbow-delimiters request restart-emacs smartparens space-doc spaceline powerline spacemacs-purpose-popwin spacemacs-whitespace-cleanup string-edit-at-point string-inflection symbol-overlay symon term-cursor toc-org treemacs-persp persp-mode undo-tree uuidgen vi-tilde-fringe vim-powerline volatile-highlights window-purpose imenu-list winum writeroom-mode visual-fill-column ws-butler which-key unfill treemacs-projectile treemacs-icons-dired treemacs-evil slime reveal-in-osx-finder quickrun pcre2el overseer osx-trash osx-dictionary osx-clipboard nameless mwim markdown-toc launchctl inspector ibuffer-projectile hybrid-mode holy-mode helm-xref helm-themes helm-swoop helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-cider helm-ag gh-md flycheck-pos-tip flycheck-package flycheck-elsa evil-mc evil-evilified-state emr elisp-slime-nav elisp-def dotenv-mode diminish diff-hl cider-eval-sexp-fu browse-at-remote bind-map auto-compile ace-jump-helm-line)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(clojure-snippets common-lisp-snippets pos-tip forge yaml ghub closql emacsql treepy git-link git-messenger git-modes git-timemachine gitignore-templates helm-c-yasnippet cider sesman parseedn clojure-mode parseclj helm-company helm-git-grep helm-ls-git markdown-mode slime-company company smeargle treemacs-magit magit magit-section git-commit with-editor transient yasnippet-snippets yasnippet ace-link aggressive-indent all-the-icons auto-highlight-symbol centered-cursor-mode clean-aindent-mode column-enforce-mode define-word devdocs dired-quick-sort drag-stuff dumb-jump editorconfig evil-anzu anzu evil-args evil-cleverparens evil-collection annalist evil-easymotion evil-escape evil-exchange evil-goggles evil-iedit-state evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-nerd-commenter evil-numbers evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar expand-region eyebrowse fancy-battery flx-ido flx golden-ratio google-translate helm-purpose hide-comnt highlight-indentation highlight-numbers parent-mode highlight-parentheses hl-todo hungry-delete indent-guide info+ link-hint lorem-ipsum multi-line shut-up open-junk-file org-superstar paradox password-generator popwin rainbow-delimiters request restart-emacs smartparens space-doc spaceline powerline spacemacs-purpose-popwin spacemacs-whitespace-cleanup string-edit-at-point string-inflection symbol-overlay symon term-cursor toc-org treemacs-persp persp-mode undo-tree uuidgen vi-tilde-fringe vim-powerline volatile-highlights window-purpose imenu-list winum writeroom-mode visual-fill-column ws-butler which-key unfill treemacs-projectile treemacs-icons-dired treemacs-evil slime reveal-in-osx-finder quickrun pcre2el overseer osx-trash osx-dictionary osx-clipboard nameless mwim markdown-toc launchctl inspector ibuffer-projectile hybrid-mode holy-mode helm-xref helm-themes helm-swoop helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-cider helm-ag gh-md flycheck-pos-tip flycheck-package flycheck-elsa evil-mc evil-evilified-state emr elisp-slime-nav elisp-def dotenv-mode diminish diff-hl cider-eval-sexp-fu browse-at-remote bind-map auto-compile ace-jump-helm-line)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
