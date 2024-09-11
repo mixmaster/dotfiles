@@ -50,6 +50,7 @@ return {
       timeout = vim.o.timeoutlen,
       default_mappings = true,
       mappings = {
+        n = { f = { d = "<Esc>" } },
         i = { f = { d = "<Esc>" } },
         c = { f = { d = "<Esc>" } },
         t = { f = { d = "<Esc>" } },
