@@ -36,6 +36,8 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/history-substring-search
     zgenom ohmyzsh plugins/sudo
     zgenom ohmyzsh plugins/z
+    zgenom ohmyzsh plugins/zsh-interactive-cd
+    zgenom ohmyzsh plugins/zsh-navigation-tools
 
     # Install ohmyzsh osx plugin if on macOS
     [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
