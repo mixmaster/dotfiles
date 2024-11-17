@@ -1,3 +1,4 @@
 alias astro="NVIM_APPNAME=astronvim nvim"
 alias nvchad="NVIM_APPNAME=nvchad nvim"
 alias lazyvim="NVIM_APPNAME=lazyvim nvim"
+alias rsbcl="rlwrap sbcl"
