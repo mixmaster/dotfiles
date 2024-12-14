@@ -41,7 +41,10 @@ return {
     end,
   },
 
-  { "cappyzawa/trim.nvim" },
+  {
+    "cappyzawa/trim.nvim",
+    opts = {},
+  },
 
   {
     "max397574/better-escape.nvim",
