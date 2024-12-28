@@ -25,6 +25,7 @@ if ! zgenom saved; then
     # zgenom ohmyzsh lib/git.zsh # load git library of ohmyzsh
 
     # plugins
+    zgenom ohmyzsh plugins/asdf
     zgenom ohmyzsh plugins/command-not-found
     zgenom ohmyzsh plugins/common-aliases
     zgenom ohmyzsh plugins/copybuffer
@@ -65,7 +66,8 @@ EOPLUGINS
     # executed every 7 days.
 fi
 
-eval "$(rbenv init - zsh)"
+[[ "$(uname -s)" = Darwin ]] && . /opt/homebrew/opt/asdf/libexec/asdf.sh
+[[ "$(uname -s)" = Linux ]] && . "$HOME/.asdf/asdf.sh"
 
 [[ -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.sh" > /dev/null 2> /dev/null
 
@@ -85,4 +87,3 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 source $HOME/.config/aliases
-
