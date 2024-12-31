@@ -1,5 +1,14 @@
 return {
   {
+    "vlime/vlime",
+    config = function(plugin)
+      vim.opt.rtp:append(plugin.dir .. "/vim")
+    end,
+  },
+
+  { "kovisoft/paredit" },
+
+  {
     "hrsh7th/nvim-cmp",
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -49,18 +58,7 @@ return {
   {
     "max397574/better-escape.nvim",
     event = "InsertCharPre",
-    opts = {
-      timeout = vim.o.timeoutlen,
-      default_mappings = true,
-      mappings = {
-        n = { f = { d = "<Esc>" } },
-        i = { f = { d = "<Esc>" } },
-        c = { f = { d = "<Esc>" } },
-        t = { f = { d = "<Esc>" } },
-        v = { f = { d = "<Esc>" } },
-        s = { f = { d = "<Esc>" } },
-      },
-    },
+    opts = {},
   },
 
   { "olimorris/onedarkpro.nvim" },
