@@ -10,11 +10,17 @@
 (defconst *mono-font-family*
   (if *is-unix* "ProFont IIx Nerd Font Mono" "JetBrainsMono Nerd Font"))
 (defconst *mono-font-height*
-  (if *is-unix* 130 130))
+  (cond
+   (*is-macos* 130)
+   (*is-linux* 110)
+   (t 130)))
 (defconst *serif-font-family*
   (if *is-unix* "IBM Plex Serif" "Georgia"))
 (defconst *serif-font-height*
-  (if *is-unix* 110 110))
+  (cond
+   (*is-macos* 130)
+   (*is-linux* 110)
+   (t 130)))
 (defconst *project-dir* (expand-file-name "~/Playground"))
 
 ;; Speed up Emacs by automatically byte-compiling and native compiling
@@ -124,7 +130,7 @@
     "wj" 'evil-window-down
     "wk" 'evil-window-up
     "wl" 'evil-window-right
-    "wm" 'delete-other-window
+    "wm" 'delete-other-windows
     "ws" 'split-window-below
     "wv" 'split-window-right
     "ww" 'other-window
@@ -428,6 +434,73 @@
   :config
   (add-to-list 'corfu-margin-formatters #'kind-all-the-icons-margin-formatter))
 
+;; Treesitter
+
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-language-source-alist
+   '((actionscript "https://github.com/Rileran/tree-sitter-actionscript")
+     (ada "https://github.com/briot/tree-sitter-ada")
+     (agda "https://github.com/tree-sitter/tree-sitter-agda")
+     (arduino "https://github.com/tree-sitter-grammars/tree-sitter-arduino")
+     (asm "https://github.com/RubixDev/tree-sitter-asm")
+     (bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
+     (c "https://github.com/tree-sitter/tree-sitter-c")
+     (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+     (clojure "https://github.com/sogaiu/tree-sitter-clojure")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (common-lisp "https://github.com/tree-sitter-grammars/tree-sitter-commonlisp")
+     (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (csv "https://github.com/tree-sitter-grammars/tree-sitter-csv")
+     (d "https://github.com/CyberShadow/tree-sitter-d")
+     (dart "https://github.com/UserNobody14/tree-sitter-dart")
+     (dockfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+     (doxygen "https://github.com/tree-sitter-grammars/tree-sitter-doxygen")
+     (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (elixir "https://github.com/elixir-lang/tree-sitter-elixir")
+     (elm "https://github.com/elm-tooling/tree-sitter-elm")
+     (erlang "https://github.com/WhatsApp/tree-sitter-erlang")
+     (fennel "https://github.com/TravonteD/tree-sitter-fennel")
+     (fish "https://github.com/ram02z/tree-sitter-fish")
+     (fluent "https://github.com/tree-sitter/tree-sitter-fluent")
+     (fortran "https://github.com/stadelmanma/tree-sitter-fortran")
+     (gitignore "https://github.com/shunsambongi/tree-sitter-gitignore")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (groovy "https://github.com/Decodetalkers/tree-sitter-groovy")
+     (haskell "https://github.com/tree-sitter/tree-sitter-haskell")
+     (java "https://github.com/tree-sitter/tree-sitter-java")
+     (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown")
+     (org "https://github.com/milisims/tree-sitter-org")
+     (pascal "https://github.com/Isopod/tree-sitter-pascal")
+     (perl "https://github.com/tree-sitter-perl/tree-sitter-perl")
+     (php "https://github.com/tree-sitter/tree-sitter-php")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (r "https://github.com/r-lib/tree-sitter-r")
+     (racket "https://github.com/6cdh/tree-sitter-racket")
+     (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+     (rust "https://github.com/tree-sitter/tree-sitter-rust")
+     (scala "https://github.com/tree-sitter/tree-sitter-scala")
+     (scheme "https://github.com/6cdh/tree-sitter-scheme")
+     (sql "https://github.com/DerekStride/tree-sitter-sql")
+     (svelt "https://github.com/Himujjal/tree-sitter-svelte")
+     (swift "https://github.com/alex-pinkus/tree-sitter-swift")
+     (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+     (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
 ;; LSP
 (use-package eglot
   :ensure nil
@@ -442,7 +515,12 @@
   :config
   ;; Optimization
   (fset #'jsonrpc--log-event #'ignore)
-  (setq jsonrpc-event-hook nil))
+  (setq jsonrpc-event-hook nil)
+
+  ;; C/C++
+  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+  (add-to-list 'c++-mode-hook 'eglot-ensure)
+  (add-to-list 'c-mode-hook 'eglot-ensure))
 
 ;; Hide warnings and display only errors
 (setq warning-minimum-level :error)
@@ -471,9 +549,9 @@
   :after flycheck
   :hook (flycheck-moe . flycheck-posframe-mode)
   :config
-                                        ; (setq flycheck-emacs-lisp-load-path 'inherit)
+  ;; (setq flycheck-emacs-lisp-load-path 'inherit)
   (flycheck-posframe-configure-pretty-defaults)
-                                        ; (add-hook 'flycheck-posframe-inhibit-functions #'company--active-p)
+  ;; (add-hook 'flycheck-posframe-inhibit-functions #'company--active-p)
   (add-hook 'flycheck-posframe-inhibit-functions #'evil-insert-state-p)
   (add-hook 'flycheck-posframe-inhibit-functions #'evil-replace-state-p))
 
@@ -591,6 +669,16 @@
   (projectile-save-known-projects)
   (projectile-mode +1))
 
+;; Persist buffers and layouts across sessions
+(use-package easysession
+  :ensure t
+  :custom
+  ;; Interval between automatic session saves
+  (easysession-save-interval (* 10 60))
+  :init
+  (add-hook 'emacs-startup-hook #'easysession-load-including-geometry 102)
+  (add-hook 'emacs-startup-hook #'easysession-save-mode 103))
+
 ;; Look & feel
 (global-display-line-numbers-mode 1)
 (global-hl-line-mode 1)
@@ -672,7 +760,8 @@
   (set-face-attribute 'rainbow-delimiters-unmatched-face nil
                       :foreground "red"
                       :inherit 'error
-                      :box t))(setq default-directory "~/")
+                      :box t))
+
 ;; always follow symlinks when opening files
 vc-follow-symlinks t
 ;; overwrite text when selected, like we expect.
@@ -703,3 +792,27 @@ dired-kill-when-opening-new-dired-buffer t
 (global-font-lock-mode 1)
 ;; refresh a buffer if changed on disk
 (global-auto-revert-mode 1)
+
+;; Common Lisp
+(defvar inferior-lisp-program "sbcl")
+
+(use-package sly
+  :defer t
+  :hook (common-lisp-mode . sly-editing-mode))
+
+(use-package sly-repl-ansi-color
+  :defer t
+  :init
+  (add-to-list 'sly-contribs 'sly-repl-ansi-color))
+
+(use-package sly-asdf
+  :defer t
+  :init
+  (add-to-list 'sly-contribs 'sly-asdf 'append))
+
+;; (use-package sly-stepper
+;;   :defer t
+;;   :init
+;;   (add-to-list 'sly-contribs 'sly-stepper))
+
+;; Python
