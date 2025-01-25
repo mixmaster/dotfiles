@@ -2,7 +2,7 @@
 
 ;; Environment
 (defconst *is-macos* (eq system-type 'darwin))
-(defconst *is-linux* (eq system-type 'linux))
+(defconst *is-linux* (eq system-type 'gnu/linux))
 (defconst *is-unix* (or *is-macos* *is-linux*))
 (defconst *is-windows* (eq system-type 'windows-nt))
 
@@ -60,11 +60,11 @@
       ;; clean up dired buffers
       dired-kill-when-opening-new-dired-buffer t)
 
-;; use human-readable sizes in dired
+;; Use human-readable sizes in dired
 (setq-default dired-listing-switches "-alh")
 
-;; always highlight code
-(global-font-lock-mode 1)
+;; Hide warnings and display only errors
+(setq warning-minimum-level :error)
 
 ;; Auto-revert in Emacs is a feature that automatically updates the
 ;; contents of a buffer to reflect changes made to the underlying file
@@ -111,6 +111,8 @@
     :non-normal-prefix "C-SPC")
   (leader-def
     "" '(:ignore t :wk "leader")
+
+    ":" 'eval-expression
 
     "b" '(:ignore t :wk "buffer")
     "bb" 'consult-buffer
@@ -248,7 +250,7 @@
   (vdiff-auto-refine t)
   (vdiff-only-highlight-refinements t))
 
-                                        ; vterm
+;; vterm
 (use-package vterm
   :ensure t
   :defer t
@@ -436,74 +438,73 @@
 
 ;; Treesitter
 
-(use-package treesit-auto
-  :ensure t
-  :custom
-  (treesit-language-source-alist
-   '((actionscript "https://github.com/Rileran/tree-sitter-actionscript")
-     (ada "https://github.com/briot/tree-sitter-ada")
-     (agda "https://github.com/tree-sitter/tree-sitter-agda")
-     (arduino "https://github.com/tree-sitter-grammars/tree-sitter-arduino")
-     (asm "https://github.com/RubixDev/tree-sitter-asm")
-     (bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
-     (c "https://github.com/tree-sitter/tree-sitter-c")
-     (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
-     (clojure "https://github.com/sogaiu/tree-sitter-clojure")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (common-lisp "https://github.com/tree-sitter-grammars/tree-sitter-commonlisp")
-     (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (csv "https://github.com/tree-sitter-grammars/tree-sitter-csv")
-     (d "https://github.com/CyberShadow/tree-sitter-d")
-     (dart "https://github.com/UserNobody14/tree-sitter-dart")
-     (dockfile "https://github.com/camdencheek/tree-sitter-dockerfile")
-     (doxygen "https://github.com/tree-sitter-grammars/tree-sitter-doxygen")
-     (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (elixir "https://github.com/elixir-lang/tree-sitter-elixir")
-     (elm "https://github.com/elm-tooling/tree-sitter-elm")
-     (erlang "https://github.com/WhatsApp/tree-sitter-erlang")
-     (fennel "https://github.com/TravonteD/tree-sitter-fennel")
-     (fish "https://github.com/ram02z/tree-sitter-fish")
-     (fluent "https://github.com/tree-sitter/tree-sitter-fluent")
-     (fortran "https://github.com/stadelmanma/tree-sitter-fortran")
-     (gitignore "https://github.com/shunsambongi/tree-sitter-gitignore")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (groovy "https://github.com/Decodetalkers/tree-sitter-groovy")
-     (haskell "https://github.com/tree-sitter/tree-sitter-haskell")
-     (java "https://github.com/tree-sitter/tree-sitter-java")
-     (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown")
-     (org "https://github.com/milisims/tree-sitter-org")
-     (pascal "https://github.com/Isopod/tree-sitter-pascal")
-     (perl "https://github.com/tree-sitter-perl/tree-sitter-perl")
-     (php "https://github.com/tree-sitter/tree-sitter-php")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (r "https://github.com/r-lib/tree-sitter-r")
-     (racket "https://github.com/6cdh/tree-sitter-racket")
-     (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
-     (rust "https://github.com/tree-sitter/tree-sitter-rust")
-     (scala "https://github.com/tree-sitter/tree-sitter-scala")
-     (scheme "https://github.com/6cdh/tree-sitter-scheme")
-     (sql "https://github.com/DerekStride/tree-sitter-sql")
-     (svelt "https://github.com/Himujjal/tree-sitter-svelte")
-     (swift "https://github.com/alex-pinkus/tree-sitter-swift")
-     (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-     (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+;; (use-package treesit-auto
+;;   :ensure t
+;;   :custom
+;;   (treesit-language-source-alist
+;;    '((actionscript "https://github.com/Rileran/tree-sitter-actionscript")
+;;      (ada "https://github.com/briot/tree-sitter-ada")
+;;      (agda "https://github.com/tree-sitter/tree-sitter-agda")
+;;      (arduino "https://github.com/tree-sitter-grammars/tree-sitter-arduino")
+;;      (asm "https://github.com/RubixDev/tree-sitter-asm")
+;;      (bash "https://github.com/tree-sitter/tree-sitter-bash")
+;;      (bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
+;;      (c "https://github.com/tree-sitter/tree-sitter-c")
+;;      (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+;;      (clojure "https://github.com/sogaiu/tree-sitter-clojure")
+;;      (cmake "https://github.com/uyha/tree-sitter-cmake")
+;;      (common-lisp "https://github.com/tree-sitter-grammars/tree-sitter-commonlisp")
+;;      (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+;;      (css "https://github.com/tree-sitter/tree-sitter-css")
+;;      (csv "https://github.com/tree-sitter-grammars/tree-sitter-csv")
+;;      (d "https://github.com/CyberShadow/tree-sitter-d")
+;;      (dart "https://github.com/UserNobody14/tree-sitter-dart")
+;;      (dockfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+;;      (doxygen "https://github.com/tree-sitter-grammars/tree-sitter-doxygen")
+;;      (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
+;;      (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+;;      (elixir "https://github.com/elixir-lang/tree-sitter-elixir")
+;;      (elm "https://github.com/elm-tooling/tree-sitter-elm")
+;;      (erlang "https://github.com/WhatsApp/tree-sitter-erlang")
+;;      (fennel "https://github.com/TravonteD/tree-sitter-fennel")
+;;      (fish "https://github.com/ram02z/tree-sitter-fish")
+;;      (fluent "https://github.com/tree-sitter/tree-sitter-fluent")
+;;      (fortran "https://github.com/stadelmanma/tree-sitter-fortran")
+;;      (gitignore "https://github.com/shunsambongi/tree-sitter-gitignore")
+;;      (go "https://github.com/tree-sitter/tree-sitter-go")
+;;      (html "https://github.com/tree-sitter/tree-sitter-html")
+;;      (groovy "https://github.com/Decodetalkers/tree-sitter-groovy")
+;;      (haskell "https://github.com/tree-sitter/tree-sitter-haskell")
+;;      (java "https://github.com/tree-sitter/tree-sitter-java")
+;;      (js . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+;;      (json "https://github.com/tree-sitter/tree-sitter-json")
+;;      (lua "https://github.com/tree-sitter-grammars/tree-sitter-lua")
+;;      (make "https://github.com/alemuller/tree-sitter-make")
+;;      (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown")
+;;      (org "https://github.com/milisims/tree-sitter-org")
+;;      (pascal "https://github.com/Isopod/tree-sitter-pascal")
+;;      (perl "https://github.com/tree-sitter-perl/tree-sitter-perl")
+;;      (php "https://github.com/tree-sitter/tree-sitter-php")
+;;      (python "https://github.com/tree-sitter/tree-sitter-python")
+;;      (r "https://github.com/r-lib/tree-sitter-r")
+;;      (racket "https://github.com/6cdh/tree-sitter-racket")
+;;      (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+;;      (rust "https://github.com/tree-sitter/tree-sitter-rust")
+;;      (scala "https://github.com/tree-sitter/tree-sitter-scala")
+;;      (scheme "https://github.com/6cdh/tree-sitter-scheme")
+;;      (sql "https://github.com/DerekStride/tree-sitter-sql")
+;;      (svelt "https://github.com/Himujjal/tree-sitter-svelte")
+;;      (swift "https://github.com/alex-pinkus/tree-sitter-swift")
+;;      (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+;;      (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+;;      (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+;;   (treesit-auto-install 'prompt)
+;;   :config
+;;   (treesit-auto-add-to-auto-mode-alist 'all)
+;;   (global-treesit-auto-mode))
 
 ;; LSP
 (use-package eglot
-  :ensure nil
   :defer t
   :commands (eglot
              eglot-rename
@@ -511,20 +512,19 @@
              eglot-format-buffer)
   :custom
   (eglot-report-progress nil) ; Prevent minibuffer spam
+  (eglot-autoshutdown t)
 
   :config
   ;; Optimization
   (fset #'jsonrpc--log-event #'ignore)
-  (setq jsonrpc-event-hook nil)
+  (setq jsonrpc-event-hook nil))
 
-  ;; C/C++
-  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-  (add-to-list 'c++-mode-hook 'eglot-ensure)
-  (add-to-list 'c-mode-hook 'eglot-ensure))
+;; Docs
+(use-package eldoc
+  :init
+  (global-eldoc-mode))
 
-;; Hide warnings and display only errors
-(setq warning-minimum-level :error)
-
+;; Which-key
 (use-package which-key
   :ensure t
   :after evil
@@ -763,33 +763,28 @@
                       :box t))
 
 ;; always follow symlinks when opening files
-vc-follow-symlinks t
+(setq vc-follow-symlinks t)
 ;; overwrite text when selected, like we expect.
-delete-seleciton-mode t
+(setq delete-seleciton-mode t)
 ;; quiet startup
-inhibit-startup-message t
-initial-scratch-message nil
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
 ;; hopefully all themes we install are safe
-custom-safe-themes t
+(setq custom-safe-themes t)
 ;; simple lock/backup file management
-create-lockfiles nil
-backup-by-copying t
-delete-old-versions t
+(setq create-lockfiles nil)
+(setq backup-by-copying t)
+(setq delete-old-versions t)
 ;; when quiting emacs, just kill processes
-confirm-kill-processes nil
+(setq confirm-kill-processes nil)
 ;; ask if local variables are safe once.
-enable-local-variables t
+(setq enable-local-variables t)
 ;; life is too short to type yes or no
-use-short-answers t
+(setq use-short-answers t)
 
 ;; clean up dired buffers
-dired-kill-when-opening-new-dired-buffer t
+(setq dired-kill-when-opening-new-dired-buffer t)
 
-;; use human-readable sizes in dired
-(setq-default dired-listing-switches "-alh")
-
-;; always highlight code
-(global-font-lock-mode 1)
 ;; refresh a buffer if changed on disk
 (global-auto-revert-mode 1)
 
@@ -815,4 +810,37 @@ dired-kill-when-opening-new-dired-buffer t
 ;;   :init
 ;;   (add-to-list 'sly-contribs 'sly-stepper))
 
+;; C/C++
+;; (use-package c++-ts-mode
+;;   :straight (:type built-in)
+;;   :defer t
+;;   :after eglot
+;;   :mode (("\\.cpp\\'" . c++-ts-mode)
+;;          ("\\.cxx\\'" . c++-ts-mode)
+;;          ("\\.hpp\\'" . c++-ts-mode))
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist
+;;                '(cpp "https://github.com/tree-sitter/tree-sitter-cpp"))
+;;   (add-to-list 'eglot-server-programs '(c++-ts-mode . "clangd"))
+;;   (add-to-list 'c++-ts-mode-hook 'eglot-ensure))
+;;
+;; (use-package c-ts-mode
+;;   :straight (:type built-in)
+;;   :defer t
+;;   :after eglot
+;;   :mode (("\\.c\\'" . c-ts-mode))
+;;   :config
+;;   (add-to-list 'treesit-language-source-alist
+;;                '(c "https://github.com/tree-sitter/tree-sitter-c"))
+;;   (add-to-list 'eglot-server-programs '(c-ts-mode . "clangd"))
+;;   (add-to-list 'c-ts-mode-hook 'eglot-ensure))
+;;
+;; (use-package c-or-c++-ts-mode
+;;   :straight (:type built-in)
+;;   :defer t
+;;   :after eglot
+;;   :mode (("\\.h\\'" . c-or-c++-ts-mode))
+;;   :config
+;;   (add-to-list 'eglot-server-programs '(c-or-c++-ts-mode . "clangd"))
+;;   (add-to-list 'c-or-c++-ts-mode-hook 'eglot-ensure))
 ;; Python
